@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 9: Tabs</title>
+
+<style>
+body { background: ghostwhite; }
+
+.tablist {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(75px,1fr));
+    gap:10px;
+}
+
+button {
+    background:lavender;
+    border:0;
+    padding:1rem;
+    cursor:pointer;
+}
+
+button[aria-selected="true"] {
+    background:white;
+    border:1px solid grey;
+}
+
+.tabpanel {
+    background:white;
+    padding:2rem;
+    border:1px solid grey;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Tabs</h1>
+
+<div id="tabs">
+<div class="tablist" role="tablist">
+<button role="tab" aria-selected="true" id="html">HTML</button>
+<button role="tab" aria-selected="false" id="css">CSS</button>
+<button role="tab" aria-selected="false" id="js">JS</button>
+</div>
+
+<div class="tabpanel" role="tabpanel" aria-labelledby="html">
+<h2>HTML</h2>
+<p>Structure of web pages.</p>
+<p>HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser. It defines the content and structure of web content. It is often assisted by technologies such as Cascading Style Sheets and scripting languages such as JavaScript.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" aria-labelledby="css" hidden>
+<h2>CSS</h2>
+<p>Styles web pages.</p>
+<p>Cascading Style Sheets is a style sheet language used for specifying the presentation and styling of a document written in a markup language such as HTML or XML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" aria-labelledby="js" hidden>
+<h2>JS</h2>
+<p>Makes pages interactive.</p>
+<p>JavaScript, often abbreviated as JS, is a programming language that conforms to the ECMAScript specification. JavaScript is high-level, often just-in-time compiled, and multi-paradigm. It has curly-bracket syntax, dynamic typing, prototype-based object-orientation, and first-class functions.</p>
+</div>
+</div>
+
+<script>
+'use strict';
+
+function showPanel(e){
+    const id = e.target.id;
+
+    document.querySelectorAll('[role="tab"]').forEach(tab=>{
+        tab.setAttribute('aria-selected','false');
+    });
+
+    e.target.setAttribute('aria-selected','true');
+
+    document.querySelectorAll('[role="tabpanel"]').forEach(panel=>{
+        panel.hidden = true;
+    });
+
+    document.querySelector(`[aria-labelledby="${id}"]`).hidden = false;
+}
+
+document.querySelectorAll('[role="tab"]').forEach(tab=>{
+    tab.addEventListener('click',showPanel);
+});
+</script>
+
+</body>
+</html>

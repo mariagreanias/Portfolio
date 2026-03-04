@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project 8: Drawing on a Canvas</title>
+
+<style>
+body {
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background-color: #000;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.controls, .bkg-controls {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+
+label { color: white; }
+
+button {
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.active {
+    background: gold;
+    font-weight: bold;
+}
+
+canvas {
+    border: 10px solid gold;
+    border-radius: 20px;
+    width: 1000px;
+    height: 600px;
+    background: gainsboro;
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<canvas width="2000" height="1200" id="sketch"></canvas>
+
+<div class="controls">
+    <button id="black" class="active">BLACK</button>
+    <button id="white">WHITE</button>
+    <button id="erase">ERASE</button>
+    <button id="rainbow">RAINBOW</button>
+    <button id="wild">WILD</button>
+
+    <input type="color" id="customColor" value="#880000">
+    <label>Custom</label>
+
+    <label>Pen Width</label>
+    <input type="range" id="thickness" min="2" max="100" value="20">
+
+    <button id="clearCanvas">CLEAR</button>
+</div>
+
+</main>
+
+<script>
+const canvas = document.querySelector('#sketch');
+const ctx = canvas.getContext('2d');
+
+let x = canvas.width / 2;
+let y = canvas.height / 2;
+
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 20;
+ctx.strokeStyle = 'black';
+
+let hue = 0;
+let drawing = false;
+let choice = 'black';
+
+ctx.beginPath();
+ctx.moveTo(x, y);
+
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (btn.id === 'clearCanvas') {
+            clearCanvas();
+            return;
+        }
+        setChoice(btn.id);
+    });
+});
+
+document.getElementById('thickness')
+    .addEventListener('input', e => ctx.lineWidth = e.target.value);
+
+document.getElementById('customColor')
+    .addEventListener('input', e => {
+        choice = 'custom';
+        ctx.strokeStyle = e.target.value;
+        setActive(null);
+    });
+
+canvas.addEventListener('mousedown', e => {
+    drawing = true;
+    x = e.offsetX * 2;
+    y = e.offsetY * 2;
+});
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mouseout', () => drawing = false);
+
+function setChoice(id) {
+    choice = id;
+    setActive(id);
+
+    
+}
+
+function setActive(id) {
+    document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    if (id) document.getElementById(id).classList.add('active');
+}
+
+function setColor() {
+    switch (choice) {
+        case 'black': ctx.strokeStyle = 'black'; break;
+        case 'white': ctx.strokeStyle = 'white'; break;
+        case 'erase': ctx.strokeStyle = 'gainsboro'; break;
+        case 'wild':
+            ctx.strokeStyle = `hsl(${Math.random()*360},100%,50%)`;
+            break;
+        case 'rainbow':
+            hue += 5;
+            ctx.strokeStyle = `hsl(${hue},100%,50%)`;
+            break;
+    }
+}
+
+function draw(e) {
+    if (!drawing) return;
+
+    setColor();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    x = e.offsetX * 2;
+    y = e.offsetY * 2;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+}
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    x = canvas.width / 2;
+    y = canvas.height / 2;
+}
+</script>
+
+</body>
+</html>

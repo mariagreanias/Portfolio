@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 15 - Get a Cat</title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    margin-top: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cat-display {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1rem;
+    max-width: 1000px;
+}
+
+img {
+    max-width: 500px;
+    max-height: 500px;
+    border-radius: 12px;
+}
+
+button {
+    background-color: lightsalmon;
+    color: black;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkorange;
+    color: white;
+}
+
+#catInfo {
+    max-width: 400px;
+    text-align: left;
+}
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🐈‍⬛ GET A CAT 🐈</h1>
+        <button id="catBtn">Get a Cat</button>
+    
+        <div class="cat-display">
+            <img id="catImage" src="">
+            <div id="catInfo"></div>
+        </div>
+    </div>
+
+<script>
+'use strict';
+
+async function loadCat() {
+    const endpoint = 'https://api.thecatapi.com/v1/images/search?has_breeds=1';
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-api-key':
+                'live_0KcYItzEDbzOCeXRnTtG4xxSpP1YySu357Wvr3k7i6Wb6sjaqkC15QZrnMuTCYdU',
+        },
+    };
+
+    try {
+        const response = await fetch(endpoint, options);
+
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        const cat = data[0];
+
+        document.getElementById('catImage').src = cat.url;
+
+        const infoDiv = document.getElementById('catInfo');
+
+        if (cat.breeds && cat.breeds.length > 0) {
+            const breed = cat.breeds[0];
+
+            infoDiv.innerHTML = `
+                <h2>${breed.name}</h2>
+                <p><strong>Origin:</strong> ${breed.origin}</p>
+                <p><strong>Temperament:</strong> ${breed.temperament}</p>
+                <p>${breed.description}</p>
+            `;
+        } else {
+            infoDiv.innerHTML = "<p>No breed info available for this cat.</p>";
+        }
+
+    } catch (error) {
+        console.log("It's a CAT-astrophe!", error);
+    }
+}
+
+// initialize
+(function init() {
+    document.getElementById('catBtn').addEventListener('click', loadCat);
+    loadCat();
+})();
+</script>
+
+</body>
+</html>

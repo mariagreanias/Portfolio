@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Motivator</title>
+
+<style>
+:root {
+    --bg: #f7f7fb;
+    --surf: #ffffff;
+    --accent: #4b5563;
+    --primary: #0689d5;
+    --radius: 12px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background: var(--bg);
+    color: #111;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background: var(--surf);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: .5rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 1rem;
+}
+
+select, textarea {
+    width: 100%;
+    padding: .7rem;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    margin-top: .3rem;
+    font-size: 1rem;
+}
+
+textarea {
+    height: 200px;
+    resize: vertical;
+}
+
+.word-count {
+    margin-top: .5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.image-box {
+    margin-top: 2rem;
+    width: 100%;
+    min-height: 250px;
+    background: #eee;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+h2 {
+    margin-top: 1.5rem;
+    color: var(--primary);
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 1.8rem; }
+    textarea { height: 160px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Writing Motivator</h1>
+    <p id="directions">Every 50 words written will generate a new cute animal picture.</p>
+
+    <label for="animalSelect">Choose an animal:</label>
+    <select id="animalSelect">
+        <option value="cat">Cat</option>
+        <option value="dog">Dog</option>
+    </select>
+
+    <label for="limitSelect">Words needed per picture:</label>
+    <select id="limitSelect">
+        <option value="50">50 words</option>
+        <option value="100">100 words</option>
+        <option value="200">200 words</option>
+        <option value="500">500 words</option>
+    </select>
+
+    <label for="writer">Start Writing:</label>
+    <textarea id="writer"></textarea>
+    <div class="word-count">Word Count: <span id="count">0</span></div>
+
+    <div class="image-box" id="imageBox">No image yet...</div>
+
+    <h2>Fun Fact</h2>
+    <p id="factArea"></p>
+
+</div>
+
+<script>
+// ---------- ELEMENT REFERENCES ----------
+const writer       = document.getElementById("writer");
+const countDisplay = document.getElementById("count");
+const animalSelect = document.getElementById("animalSelect");
+const limitSelect  = document.getElementById("limitSelect");
+const directions   = document.getElementById("directions");
+const imageBox     = document.getElementById("imageBox");
+const factArea     = document.getElementById("factArea");
+
+let currentBatch = 0;
+
+const getWordCount = text =>
+    text.trim().split(/\s+/).filter(Boolean).length;
+
+const updateDirections = () =>
+    directions.textContent = `Every ${limitSelect.value} words written will generate a new cute animal picture.`;
+
+updateDirections();
+
+const fetchAnimalImage = async type => {
+    const urls = {
+        cat: "https://api.thecatapi.com/v1/images/search",
+        dog: "https://dog.ceo/api/breeds/image/random"
+    };
+
+    const res = await fetch(urls[type]);
+    const data = await res.json();
+    return type === "cat" ? data[0].url : data.message;
+};
+
+const fetchFunFact = async type => {
+    const urls = {
+        cat: "https://catfact.ninja/fact",
+        dog: "https://dog-api.kinduff.com/api/facts?limit=1"
+    };
+
+    const res = await fetch(urls[type]);
+    const data = await res.json();
+    return type === "cat" ? data.fact : data.facts[0];
+};
+
+async function showNewImageAndFact() {
+    const type = animalSelect.value;
+
+    const [imgURL, fact] = await Promise.all([
+        fetchAnimalImage(type),
+        fetchFunFact(type)
+    ]);
+
+    imageBox.innerHTML = `<img src="${imgURL}" alt="Cute ${type}">`;
+    factArea.textContent = fact;
+}
+
+function handleTyping() {
+    const text = writer.value;
+    const wordCount = getWordCount(text);
+    countDisplay.textContent = wordCount;
+
+    const limit = Number(limitSelect.value);
+    const batch = Math.floor(wordCount / limit);
+
+    if (batch > currentBatch) {
+        currentBatch = batch;
+        showNewImageAndFact();
+    }
+}
+
+writer.addEventListener("keyup", handleTyping);
+
+limitSelect.addEventListener("change", () => {
+    updateDirections();
+    currentBatch = Math.floor(getWordCount(writer.value) / Number(limitSelect.value));
+});
+
+animalSelect.addEventListener("change", () => {
+    if (currentBatch > 0) showNewImageAndFact();
+});
+
+handleTyping();
+</script>
+
+</body>
+</html>

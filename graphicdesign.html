@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphic Design — Maria Greanias</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream:#f5f0e8;
+  --ink:#000000;
+  --rust:#21a5d5;
+  --gold:#d4a843;
+  --muted:#000000;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--cream);
+  font-family:'DM Mono',monospace;
+  color:var(--ink);
+  cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* NAV */
+.main-nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 48px;
+  background:var(--cream);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--ink);
+}
+.nav-right{display:flex;gap:36px;}
+.nav-right a{
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink);
+}
+.nav-right a:hover{color:var(--rust);}
+
+/* HERO */
+.work-hero{
+  padding:120px 48px 80px;
+}
+.work-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6vw,90px);
+  font-weight:900;
+}
+.work-hero em{
+  color:var(--rust);
+  font-style:italic;
+}
+.work-hero p{
+  margin-top:24px;
+  max-width:500px;
+  font-size:13px;
+  line-height:1.8;
+}
+
+/* GRID */
+.work-grid{
+  padding:0 45px 120px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+.project{
+  border:1px solid var(--rust);
+  padding:28px;
+  transition:.4s;
+  cursor:none;
+}
+.project:hover{
+  background:var(--rust);
+  color:var(--cream);
+}
+.project-title{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  font-weight:900;
+  margin-bottom:16px;
+  text-align: center;
+}
+.project-desc{
+  font-size:13px;
+  line-height:1.8;
+  text-align: center;
+}
+.project img{
+  width:100%;
+  height: auto;
+  object-fit:cover;
+  margin-top:20px;
+  display:block;
+}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  padding:80px 48px;
+  color:var(--cream);
+}
+footer a{
+  color:var(--rust);
+  text-decoration:none;
+}
+
+@media(max-width:768px){
+  .work-grid{grid-template-columns:1fr;}
+  .work-hero{padding:80px 24px;}
+  .work-grid{padding:0 24px 80px;}
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="main-nav">
+  <a href="home.html" class="nav-logo">MG</a>
+  <div class="nav-right">
+    <a href="webdesign.html">Web Design</a>
+    <a href="graphicdesign.html">Graphic Design</a>
+    <a href="resume.html">Resume</a>
+  </div>
+</nav>
+
+<section class="work-hero">
+  <h1>Graphic <em>Design.</em></h1>
+  <p>Strategic visual systems that shape perception, build identity, and communicate with clarity.</p>
+</section>
+
+<section class="work-grid">
+  <div class="project">
+    <div class="project-title">School Event Promo</div>
+    <div class="project-desc">Commissioned; Info provided by coaches, given school colors, full creative freedom allowed; Adobe Illustrator; 2025</div>
+    <img src="projects for portfolio/GD/POSTERS/LOUIE POSTER/POSTERv2.png" alt="Middle School XC Race Promo">
+    
+  </div>
+
+  <div class="project">
+    <div class="project-title">Club Fundraiser</div>
+    <div class="project-desc">Volunteered Service Project; full creative freedom, details provided; Adobe Illustrator; 2025</div>
+    <img src="projects for portfolio/GD/POSTERS/FUNDRAISER.png" alt="Club Fundraiser Flyer">
+  </div>
+
+  <div class="project">
+    <div class="project-title">Church Opening Promo</div>
+    <div class="project-desc">Commisioned by Priest; Images and info provided; full creative freedom; Adobe Indesign; 2025</div>
+    <img src="projects for portfolio/GD/POSTERS/churchflyer.jpg" alt="Church Opening Flyer">
+  </div>
+
+  <div class="project">
+    <div class="project-title">Church Opening Logo</div>
+    <div class="project-desc">Commisioned by Priest; images provided, reshaped; general idea provided, but creative freedom allowed; Adobe Illustrator; 2025</div>
+    <img src="projects for portfolio/GD/CHURCHLOGO copy.png" alt="Church Logo Design">
+  </div>
+
+  <div class="project">
+    <div class="project-title">Soma Cafe Menu </div>
+    <div class="project-desc">Class project; Pick a business to create a menu for, redesign; full creative freedom; Adobe Indesign; 2024</div>
+    <img src="projects for portfolio/GD/MENUs/projs.png" alt="cafe Menu part 1">
+    <img src="projects for portfolio/GD/MENUs/projs2.png" alt="Cafe Menu part 2">
+  </div>
+
+  <div class="project">
+    <div class="project-title">Class - Music Album remake</div>
+    <div class="project-desc">Chosen favorite artist at time; music info via Spotify; full creative freedom to remake idea; Adobe Indesign; 2024</div>
+    <img src="projects for portfolio/GD/POSTERS/PERSONSPOT.png" alt="Music artist promotional poster">
+  </div>
+
+</section>
+
+<footer>
+  <p>© 2026 Maria Greanias — <a href="mailto:hello@mariagreanias.com">Say hello</a></p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; 
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, .project, .skill-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      cursorRing.style.width = '60px';
+      cursorRing.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      cursorRing.style.width = '40px';
+      cursorRing.style.height = '40px';
+    });
+  });
+</script>
+
+</body>
+</html>

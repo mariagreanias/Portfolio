@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Greanias — Digital Designer</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f0e8;
+            --ink: #000000;
+            --rust: #21a5d5;
+            --gold: #d4a843;
+            --muted: #000000;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'DM Mono', monospace;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: var(--rust);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+            mix-blend-mode: multiply;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--rust);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s;
+            opacity: 0.5;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.4;
+        }
+
+        .marquee-strip {
+            background: var(--ink);
+            color: var(--rust);
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 14px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 10;
+        }
+
+        .marquee-inner {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-inner span {
+            margin: 0 40px;
+        }
+
+        .marquee-inner .dot {
+            color: var(--rust);
+            margin: 0 10px;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 5rem;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            mix-blend-mode: multiply;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            color: var(--rust);
+            text-decoration: none;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 80px 48px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.3s;
+        }
+
+        .hero-eyebrow span {
+            display: inline-block;
+            width: 32px;
+            height: 1px;
+            background: var(--rust);
+            vertical-align: middle;
+            margin-right: 12px;
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(56px, 8vw, 110px);
+            font-weight: 900;
+            line-height: 0.92;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+            opacity: 0;
+            animation: fadeUp 1s ease forwards 0.5s;
+        }
+
+        .hero-name .italic {
+            font-style: italic;
+            color: var(--rust);
+            display: block;
+        }
+
+        .hero-desc {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 360px;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.7s;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--cream);
+            background: var(--ink);
+            padding: 18px 32px;
+            position: relative;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.9s;
+            width: fit-content;
+        }
+
+        .hero-cta::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid var(--rust);
+            opacity: 0;
+            transition: opacity 0.3s, inset 0.3s;
+        }
+
+        .hero-cta:hover::after {
+            opacity: 1;
+            inset: -4px;
+        }
+
+        .hero-cta:hover {
+            background: var(--rust);
+        }
+
+        .hero-cta svg {
+            transition: transform 0.3s;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .hero-right {
+            position: relative;
+            overflow: hidden;
+            background: var(--ink);
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 30vw;
+            font-weight: 900;
+            color: rgba(53, 183, 230, 0.426);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.098) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .floating-tag {
+            position: absolute;
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            animation: floatTag 6s ease-in-out infinite;
+        }
+
+        .floating-tag:nth-child(1) {
+            top: 25%;
+            left: 20%;
+        }
+
+        .floating-tag:nth-child(2) {
+            top: 45%;
+            left: 55%;
+            color: var(--gold);
+            border-color: var(--gold);
+            opacity: 0.6;
+        }
+
+        .floating-tag:nth-child(3) {
+            top: 65%;
+            left: 25%;
+        }
+
+        .floating-tag:nth-child(4) {
+            top: 70%;
+            left: 60%;
+        }
+
+        .floating-tag:nth-child(5) {
+            top: 15%;
+            left: 60%;
+            color: var(--rust);
+            border-color: var(--rust);
+            opacity: 0.7;
+        }
+
+        @keyframes floatTag {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        .hero-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotateSlow 30s linear infinite;
+        }
+
+        .hero-circle:nth-child(6) {
+            width: 300px;
+            height: 300px;
+        }
+
+        .hero-circle:nth-child(7) {
+            width: 450px;
+            height: 450px;
+            animation-direction: reverse;
+            animation-duration: 45s;
+        }
+
+        .hero-circle:nth-child(8) {
+            width: 580px;
+            height: 580px;
+        }
+
+        @keyframes rotateSlow {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .center-initials {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 130px;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.224);
+            letter-spacing: -0.05em;
+            opacity: 0;
+            animation: fadeUp 1.2s ease forwards 0.6s;
+        }
+
+        .stats-bar {
+            background: var(--ink);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-item {
+            padding: 36px 48px;
+            border-right: 1px solid rgba(255, 255, 255, 0.06);
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .stat-item:nth-child(3) {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 900;
+            color: var(--cream);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rust);
+        }
+
+        .skills-section {
+            padding: 120px 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 24px;
+            margin-bottom: 72px;
+        }
+
+        .section-num {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: var(--rust);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--rust);
+            border: 1.5px solid var(--rust);
+        }
+
+        .skill-card {
+            background: var(--cream);
+            padding: 48px 40px;
+            position: relative;
+            transition: background 0.4s ease;
+            cursor: none;
+        }
+
+        .skill-card::before {
+            content: attr(data-num);
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.04);
+        }
+
+        .skill-card:hover {
+            background: var(--rust);
+        }
+
+        .skill-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .skill-desc {
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .about-strip {
+            background: var(--rust);
+            padding: 80px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-label {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+        }
+
+        .about-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 900;
+            color: var(--cream);
+        }
+
+        .about-right p {
+            font-size: 13px;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 20px;
+        }
+
+        .about-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cream);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 4px;
+        }
+
+        footer {
+            background: var(--muted);
+            padding: 100px 48px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: end;
+        }
+
+        .footer-label {
+            font-size: 16px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 24px;
+        }
+
+        .footer-email {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 42px);
+            font-weight: 900;
+            color: var(--rust);
+            text-decoration: none;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--rust);
+            opacity: 0.08;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 60px;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            grid-column: 1/-1;
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: var(--rust);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-socials a {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--rust);
+            text-decoration: none;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media(max-width:768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-right {
+                display: none;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-strip {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="marquee-strip">
+        <div class="marquee-inner">
+            <span>Digital Designer</span><span class="dot">✦</span>
+            <span>Web & Graphics</span><span class="dot">✦</span>
+            <span>Maria Greanias</span><span class="dot">✦</span>
+            <span>UI/UX Design</span><span class="dot">✦</span>
+            <span>Visual Storytelling</span><span class="dot">✦</span>
+            <span>Brand Identity</span><span class="dot">✦</span>
+        </div>
+    </div>
+    <section class="hero">
+        <div class="hero-left">
+            <p class="hero-eyebrow"><span></span>Available for work · 2026</p>
+            <h1 class="hero-name">Maria <span class="italic">Greanias.</span></h1>
+            <p class="hero-desc">Digital designer specializing in web and graphics. I craft intentional, expressive work
+                that lives at the intersection of form and function.</p>
+            <a href="webdesign.html" class="hero-cta">View my work</a>
+        </div>
+        <div class="hero-right">
+            <div class="hero-grid"></div>
+            <div class="hero-bg-text">MG</div>
+            <div class="floating-tag">UI Design</div>
+            <div class="floating-tag">Typography</div>
+            <div class="floating-tag">Web Design</div>
+            <div class="floating-tag">Branding</div>
+            <div class="floating-tag">Graphics</div>
+            <div class="hero-circle"></div>
+            <div class="hero-circle"></div>
+            <div class="hero-circle"></div>
+            <div class="center-initials">MG</div>
+        </div>
+    </section>
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-num">5<span>+</span></div>
+            <div class="stat-label">Years designing</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">40<span>+</span></div>
+            <div class="stat-label">Projects delivered</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Ideas in progress</div>
+        </div>
+    </div>
+    <section class="skills-section">
+        <div class="section-header"><span class="section-num">01</span>
+            <h2 class="section-title">What I do</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card" data-num="1">
+                <h3 class="skill-title">Web Design</h3>
+                <p class="skill-desc">Designing digital experiences that are as beautiful as they are usable.</p>
+            </div>
+            <div class="skill-card" data-num="2">
+                <h3 class="skill-title">Graphic Design</h3>
+                <p class="skill-desc">Creating visual identities and collateral with clarity and personality.</p>
+            </div>
+            <div class="skill-card" data-num="3">
+                <h3 class="skill-title">Brand Identity</h3>
+                <p class="skill-desc">Building cohesive brand systems that give companies a lasting presence.</p>
+            </div>
+        </div>
+    </section>
+    <section class="about-strip">
+        <div>
+            <p class="about-label">About me</p>
+            <h2 class="about-headline">Designing with purpose & beauty.</h2>
+        </div>
+        <div class="about-right">
+            <p>I'm a digital designer who believes great design isn't just how something looks — it's how it feels to
+                use.</p>
+            <a href="resume.html" class="about-link">See full résumé</a>
+        </div>
+    </section>
+    <footer>
+        <div>
+            <p class="footer-label">Let's make something together</p>
+            <a href="mailto:hello@mariagreanias.com" class="footer-email">Say hello →</a>
+        </div>
+        <div class="footer-logo">MG</div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2026 Maria Greanias</p>
+            <div class="footer-socials"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Instagram</a></div>
+        </div>
+    </footer>
+    <script>
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+        function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; requestAnimationFrame(animateRing); } animateRing();
+    </script>
+</body>
+
+</html>

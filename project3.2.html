@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What's Da Number?</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* 🎮 Custom CSS Styles */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #00b4d8, #0077b6, #00b894);
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.game-container {
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  width: 92%;
+  max-width: 700px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: #0077b6;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+#numberGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  margin-top: 25px;
+}
+
+.num-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e9ecef;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.num-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: #caf0f8;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.num-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.too-low {
+  background-color: #4dabf7 !important;
+  color: #fff !important;
+}
+
+.too-high {
+  background-color: #fa5252 !important;
+  color: #fff !important;
+}
+
+.correct {
+  background-color: #51cf66 !important;
+  color: #fff !important;
+  animation: pop 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+#message {
+  margin-top: 25px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  min-height: 1.3em;
+}
+
+#guessCount {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+#replayBtn {
+  margin-top: 30px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #00b894;
+  border: none;
+  color: #fff;
+}
+
+#replayBtn:hover {
+  background-color: #019874;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 500px) {
+  .num-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .game-container {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container text-center py-5 game-container">
+  <h1>🎯 What's Da Number?</h1>
+  <h2>Click a number between 1 and 50</h2>
+  <p>Try to guess in the fewest attempts possible!</p>
+
+  <div id="numberGrid"></div>
+
+  <div id="message"></div>
+  <div id="guessCount"></div>
+
+  <button id="replayBtn" class="d-none">🔁 Play Again</button>
+</div>
+
+<script>
+'use strict';
+
+let randomNumber;
+let guessCount = 0;
+let gameActive = true;
+
+const numberGrid = document.getElementById('numberGrid');
+const message = document.getElementById('message');
+const guessCountDisplay = document.getElementById('guessCount');
+const replayBtn = document.getElementById('replayBtn');
+
+document.addEventListener('DOMContentLoaded', startGame);
+
+function createGrid(size = 50) {
+  numberGrid.innerHTML = '';
+  for (let i = 1; i <= size; i++) {
+    const numBtn = document.createElement('button');
+    numBtn.textContent = i;
+    numBtn.classList.add('num-btn');
+    numBtn.addEventListener('click', () => handleGuess(i, numBtn));
+    numberGrid.appendChild(numBtn);
+  }
+}
+
+function startGame() {
+  randomNumber = Math.floor(Math.random() * 50) + 1;
+  guessCount = 0;
+  gameActive = true;
+
+  message.textContent = 'Pick a number to start guessing!';
+  guessCountDisplay.textContent = 'Guesses so far: 0';
+  replayBtn.classList.add('d-none');
+  createGrid();
+}
+
+function handleGuess(number, btn) {
+  if (!gameActive) return;
+
+  guessCount++;
+  btn.disabled = true;
+
+  if (number === randomNumber) {
+    btn.classList.add('correct');
+    message.textContent = `🎉 Correct! The number was ${randomNumber}. You guessed it in ${guessCount} tries!`;
+    endGame();
+  } else if (number < randomNumber) {
+    btn.classList.add('too-low');
+    message.textContent = `⬆️ ${number} is too low! Try higher.`;
+  } else {
+    btn.classList.add('too-high');
+    message.textContent = `⬇️ ${number} is too high! Try lower.`;
+  }
+
+  guessCountDisplay.textContent = `Guesses so far: ${guessCount}`;
+}
+
+function endGame() {
+  gameActive = false;
+  document.querySelectorAll('.num-btn').forEach(btn => btn.disabled = true);
+  replayBtn.classList.remove('d-none');
+}
+
+replayBtn.addEventListener('click', startGame);
+</script>
+
+</body>
+</html>

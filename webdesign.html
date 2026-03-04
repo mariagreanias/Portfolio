@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Design — Maria Greanias</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#f5f0e8;
+  --ink:#000000;
+  --rust:#21a5d5;
+  --gold:#d4a843;
+  --muted:#000000;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--cream);
+  font-family:'DM Mono',monospace;
+  color:var(--ink);
+  cursor:none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* NAV */
+.main-nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 48px;
+  background:var(--cream);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:100;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--ink);
+}
+.nav-right{
+  display:flex;
+  gap:36px;
+}
+.nav-right a{
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink);
+  position:relative;
+}
+.nav-right a:hover{color:var(--rust);}
+
+/* PAGE HEADER */
+.work-hero{
+  padding:120px 48px 80px;
+}
+.work-hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(48px,6vw,90px);
+  font-weight:900;
+  line-height:.95;
+}
+.work-hero em{
+  font-style:italic;
+  color:var(--rust);
+}
+.work-hero p{
+  margin-top:24px;
+  max-width:500px;
+  font-size:13px;
+  line-height:1.8;
+}
+
+/* WORK GRID */
+.work-grid{
+  padding:0 48px 120px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:60px;
+}
+
+.project{
+  position:relative;
+  overflow:hidden;
+  cursor:none;
+}
+.project-img{
+  width:100%;
+  aspect-ratio: 4 / 3;   /* keeps everything consistent */
+  overflow:hidden;
+  position:relative;
+  transition:transform .6s ease;
+}
+
+.project-img img,
+.project-img video{
+  width:100%;
+  height:100%;
+  object-fit:contain;   /* shows full image */
+  display:block;
+}
+.project:hover .project-img{
+  transform:scale(1.05);
+}
+.project-meta{
+  margin-top:24px;
+}
+.project-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.project-desc{
+  font-size:13px;
+  line-height:1.8;
+  color:var(--muted);
+}
+.project-tag{
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--rust);
+  margin-bottom:12px;
+}
+
+/* FOOTER */
+footer{
+  background:var(--ink);
+  padding:80px 48px;
+  color:var(--cream);
+}
+footer a{
+  color:var(--rust);
+  text-decoration:none;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .work-grid{grid-template-columns:1fr;}
+  .work-hero{padding:80px 24px;}
+  .work-grid{padding:0 24px 80px;}
+  .main-nav{padding:20px 24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="main-nav">
+  <a href="home.html" class="nav-logo">MG</a>
+  <div class="nav-right">
+    <a href="webdesign.html">Web Design</a>
+    <a href="graphicdesign.html">Graphic Design</a>
+    <a href="resume.html">Resume</a>
+  </div>
+</nav>
+
+<section class="work-hero">
+  <h1>Web <em>Design.</em></h1>
+  <p>Intentional digital experiences rooted in clarity, usability, and expressive visual systems.</p>
+</section>
+
+<section class="work-grid">
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ProjectWriter.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project1.png" alt="Writing Motivator">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Writing Motivator</div>
+      <div class="project-desc">
+        Responsive Writing platform that provides images of animals based on word count.
+      </div>
+    </div>
+  </a>
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/index.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project3.png" alt="Number Guesser 1">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Guess the Number</div>
+      <div class="project-desc">
+        Responsive Number guessing game that provides feedback on how close the guess is to the correct number.
+      </div>
+    </div>
+  </a>
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/project3.2.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project2.png" alt="Number Guesser 2">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Guess the Number V2</div>
+      <div class="project-desc">
+        Updated version of the number guessing game with a more intuitive interface and improved feedback system.
+      </div>
+    </div>
+  </a>
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ShapeCalc.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project4.png" alt="Shape Calculator">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Shape Calculator</div>
+      <div class="project-desc">
+        Responsive shape calculator that computes area and perimeter for various shapes based on user input.
+      </div>
+    </div>
+  </a>
+  
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/PetRegis.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project5.png" alt="Pet Registration Form">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Pet Registration Form</div>
+      <div class="project-desc">
+        Responsive pet registration form that collects user input.
+      </div>
+    </div>
+  </a>
+  
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/MODALbeatles.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project6.png" alt="Beatles Modal">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Beatles Modal</div>
+      <div class="project-desc">
+        Responsive modal that displays information about the Beatles when triggered by a button click.
+      </div>
+    </div>
+  </a>
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/CAT.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/project7.png" alt="Cat Modal">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Cat Modal</div>
+      <div class="project-desc">
+        Responsive modal that displays information about cats when triggered by a button click.
+      </div>
+    </div>
+  </a>
+
+  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/Sketch.html" target="_blank" class="project">
+    <div class="project-img">
+      <img src="project images and recordings/Project8.png" alt="Sketch Modal">
+    </div>
+  
+    <div class="project-meta">
+      <div class="project-tag">UI / UX</div>
+      <div class="project-title">Drawing Program</div>
+      <div class="project-desc">
+        Responsive drawing program that allows users to create sketches on a canvas element, with options to change brush size and color.
+      </div>
+    </div>
+  </a>
+
+  
+
+</section>
+
+<footer>
+  <p>© 2026 Maria Greanias — <a href="mailto:hello@mariagreanias.com">Say hello</a></p>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; 
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, .project, .skill-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      cursorRing.style.width = '60px';
+      cursorRing.style.height = '60px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      cursorRing.style.width = '40px';
+      cursorRing.style.height = '40px';
+    });
+  });
+</script>
+
+</body>
+</html>

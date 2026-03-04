@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project 7 Registration Form</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.error {
+    display: none;
+    color: red;
+}
+
+.show {
+    display: block;
+}
+
+fieldset {
+    border: 1px inset black;
+    padding: 4rem;
+}
+
+legend {
+    font-weight: bold;
+    text-align: center;
+}
+
+.checkbox-columns {
+    padding-left: 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px 10px;
+}
+
+p {
+    text-align: center;
+    color: red;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 35%;
+}
+</style>
+</head>
+
+<body>
+<div class="container my-5">
+<form name="camps">
+
+<img src="logo.png" alt="CuddleClub">
+
+<fieldset>
+<legend>Owner Information</legend>
+
+<div class="mb-3">
+<label class="form-label">Name (First & Last)</label>
+<input type="text" class="form-control" id="ownerName">
+<span class="error">A name is required.</span>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Email</label>
+<input type="email" class="form-control" id="ownerEmail">
+<span class="error">A valid email is required.</span>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Phone</label>
+<input type="tel" class="form-control" id="ownerPhone">
+<span class="error">A valid phone is required.</span>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Emergency Contact Name</label>
+<input type="text" class="form-control" id="emergencyName">
+<span class="error">A name is required.</span>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Emergency Contact Phone</label>
+<input type="tel" class="form-control" id="emergencyPhone">
+<span class="error">A valid phone is required.</span>
+</div>
+
+<legend class="mt-4">Canine Information</legend>
+
+<div class="mb-3">
+<label class="form-label">Dog's Name</label>
+<input type="text" class="form-control" id="dogName">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Breed</label>
+<input type="text" class="form-control" id="dogBreed">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Age</label>
+<input type="number" class="form-control" id="dogAge" min="0" max="25">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Weight</label>
+<input type="number" class="form-control" id="dogWeight" min="1" max="300">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Spayed / Neutered?</label>
+<select class="form-select" id="fixedStatus">
+<option value="">Select one</option>
+<option value="yes">Yes</option>
+<option value="no">No</option>
+</select>
+</div>
+
+<div class="mb-3">
+<label class="form-label">Additional Notes</label>
+<textarea class="form-control" id="dogNotes"></textarea>
+</div>
+
+<legend class="mt-4">Personality</legend>
+<p>Check all that apply</p>
+
+<div class="checkbox-columns">
+<div class="form-check"><input class="form-check-input" type="checkbox"> Mellow</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> High Energy</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Vocal</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Toy Aggressive</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Escape Artist</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Digger</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Feces Eater</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Runs Away</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Destructive</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Shy</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Dominant</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> People Aggressive</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Separation Anxiety</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Noise Sensitivity</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Leash Reactive</div>
+<div class="form-check"><input class="form-check-input" type="checkbox"> Other</div>
+</div>
+
+<button type="submit" class="btn btn-primary mt-3">Submit</button>
+<button type="reset" class="btn btn-secondary mt-3">Reset</button>
+
+</fieldset>
+</form>
+</div>
+
+<script>
+'use strict';
+
+function showError(input) {
+    const span = input.parentElement.querySelector('.error');
+    span.classList.add('show');
+    input.classList.add('is-invalid');
+}
+
+function hideError(input) {
+    const span = input.parentElement.querySelector('.error');
+    span.classList.remove('show');
+    input.classList.remove('is-invalid');
+}
+
+function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validPhone(phone) {
+    return /^(\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}$/.test(phone);
+}
+
+document.forms.camps.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    let isValid = true;
+
+    const ownerName = document.getElementById('ownerName');
+    const ownerEmail = document.getElementById('ownerEmail');
+    const ownerPhone = document.getElementById('ownerPhone');
+    const emergencyName = document.getElementById('emergencyName');
+    const emergencyPhone = document.getElementById('emergencyPhone');
+
+    if (ownerName.value.trim() === "") {
+        showError(ownerName); isValid = false;
+    } else hideError(ownerName);
+
+    if (!validEmail(ownerEmail.value.trim())) {
+        showError(ownerEmail); isValid = false;
+    } else hideError(ownerEmail);
+
+    if (!validPhone(ownerPhone.value.trim())) {
+        showError(ownerPhone); isValid = false;
+    } else hideError(ownerPhone);
+
+    if (emergencyName.value.trim() === "") {
+        showError(emergencyName); isValid = false;
+    } else hideError(emergencyName);
+
+    if (!validPhone(emergencyPhone.value.trim())) {
+        showError(emergencyPhone); isValid = false;
+    } else hideError(emergencyPhone);
+
+    if (!isValid) return;
+
+    alert("Form submitted successfully!");
+    document.forms.camps.reset();
+    document.querySelectorAll('.error').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('.is-invalid').forEach(e => e.classList.remove('is-invalid'));
+});
+</script>
+
+</body>
+</html>
