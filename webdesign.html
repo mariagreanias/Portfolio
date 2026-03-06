@@ -83,7 +83,11 @@ body{
 
 /* PAGE HEADER */
 .work-hero{
-  padding:120px 48px 80px;
+  padding:60px 48px 30px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 .work-hero h1{
   font-family:'Playfair Display',serif;
@@ -100,6 +104,70 @@ body{
   max-width:500px;
   font-size:13px;
   line-height:1.8;
+}
+
+/* HIGHLIGHTED PROJECT */
+.featured-project {
+  padding: 0 48px 100px;
+}
+
+.featured-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.featured-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform .6s ease;
+}
+
+.featured-card:hover .featured-img img {
+  transform: scale(1.05);
+}
+
+.featured-meta {
+  max-width: 500px;
+}
+
+.featured-label {
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 16px;
+}
+
+.featured-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.featured-desc {
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* Responsive */
+@media(max-width: 768px){
+  .featured-card {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 /* WORK GRID */
@@ -187,12 +255,33 @@ footer a{
     <a href="webdesign.html">Web Design</a>
     <a href="graphicdesign.html">Graphic Design</a>
     <a href="resume.html">Resume</a>
+    <a href="aboutme.html">About</a>
   </div>
 </nav>
 
 <section class="work-hero">
   <h1>Web <em>Design.</em></h1>
   <p>Intentional digital experiences rooted in clarity, usability, and expressive visual systems.</p>
+</section>
+
+<section class="featured-project">
+
+  <a href="https://www.cardinalcolorgroup.com/" target="_blank" class="featured-card">
+
+    <div class="featured-img">
+      <img src="project images and recordings/INTERNSHIP.png" alt="Summer Internship Project">
+    </div>
+
+    <div class="featured-meta">
+      <div class="featured-label">FEATURED PROJECT — Summer Internship</div>
+      <div class="featured-title">Summer Design Intern</div>
+      <div class="featured-desc">
+        Over the 25' Summer, I was very grateful and fortunate to work alongside with Links Technology Solutions, getting to be in charge of the redesign of a clients website. It was such an amazing time and experience. It was the perfect environment and helped me realize that it was exactly what I was looking for in a career.
+      </div>
+    </div>
+
+  </a>
+
 </section>
 
 <section class="work-grid">

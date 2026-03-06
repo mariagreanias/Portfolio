@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Maria Greanias</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #f5f0e8;
+  --ink: #000000;
+  --rust: #21a5d5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:var(--cream);
+  font-family:'Inter', sans-serif;
+  color:var(--ink);
+  cursor:none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HEADSHOT */
+.headshot-wrapper{
+  margin-bottom:40px;
+  text-align:center;
+}
+
+.headshot{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin:0 auto 20px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+
+.headshot-caption{
+  font-size:12px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--rust);
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--rust);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+}
+
+/* NAV */
+.main-nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 48px;
+  background:var(--cream);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:100;
+}
+
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.nav-right{
+  display:flex;
+  gap:36px;
+}
+
+.nav-right a{
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.nav-right a:hover{
+  color:var(--rust);
+}
+
+/* HERO */
+.about-hero{
+  padding:100px 48px 60px;
+  text-align:center;
+}
+
+.about-hero h1{
+  font-family:'Playfair Display', serif;
+  font-size:clamp(48px,6vw,90px);
+  font-weight:900;
+}
+
+.about-hero em{
+  color:var(--rust);
+  font-style:italic;
+}
+
+
+
+/* CONTENT SECTION */
+.about-section{
+  padding:40px 48px 100px;
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+}
+
+.section-title{
+  font-family:'Playfair Display', serif;
+  font-size:36px;
+  font-weight:900;
+  margin-bottom:24px;
+}
+
+.about-hero p,
+.section-text{
+  font-size:16px;
+  line-height:1.9;
+  margin-bottom:24px;
+}
+
+/* SKILLS */
+.skills-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px 40px;
+  font-size:12px;
+  letter-spacing:.05em;
+}
+
+/* CONTACT */
+.contact-box{
+  margin-top:50px;
+  font-size:18px;
+  line-height:2.2;
+  font-weight: 500;
+}
+
+.contact-box a{
+  color:var(--rust);
+  text-decoration:none;
+}
+
+/* WHY WORK WITH ME */
+.highlight-box{
+  background:white;
+  padding:40px;
+  border-radius:8px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-section{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+}
+
+@media(max-width:768px){
+  .about-hero{padding:80px 24px 40px;}
+  .about-section{padding:20px 24px 80px;}
+  .main-nav{padding:20px 24px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav class="main-nav">
+  <a href="home.html" class="nav-logo">MG</a>
+  <div class="nav-right">
+    <a href="webdesign.html">Web Design</a>
+    <a href="graphicdesign.html">Graphic Design</a>
+    <a href="resume.html">Resume</a>
+    <a href="aboutme.html">About</a>
+  </div>
+</nav>
+
+<section class="about-hero">
+  <h1>About <em>Me.</em></h1>
+  <p>
+    I’m Maria Greanias — a designer focused on building thoughtful digital experiences 
+    that balance usability, clarity, and expressive visual systems.
+  </p>
+</section>
+
+<section class="about-section">
+
+  <div>
+    <div class="section-title">My Approach</div>
+    <div class="section-text">
+      I approach design as both a creative and analytical discipline. 
+      Every interface I build is rooted in structure, intentional spacing, 
+      and user-centered thinking.
+    </div>
+    <div class="section-text">
+      I enjoy solving complex problems through simple systems — whether 
+      that’s building responsive web applications, refining interaction 
+      details, or creating cohesive visual identities.
+    </div>
+
+    <div class="section-title">Skills</div>
+    <div class="skills-list">
+      <div>HTML5</div>
+      <div>CSS3</div>
+      <div>Responsive Design</div>
+      <div>UI / UX Design</div>
+      <div>JavaScript</div>
+      <div>Visual Systems</div>
+      <div>Wireframing</div>
+      <div>Typography</div>
+      <div>Prototyping</div>
+      <div>Interaction Design</div>
+      <div>Figma</div>
+      <div>Adobe Suite</div>
+    </div>
+
+    <div class="contact-box">
+      <div class="section-title">Contact</div>
+      <div>Email: <a href="mailto:hello@mariagreanias.com">hello@mariagreanias.com</a></div>
+      <div>Portfolio: <a href="#">mariagreanias.com</a></div>
+      <div>LinkedIn: <a href="#">linkedin.com/in/mariagreanias</a></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="headshot-wrapper">
+        <img src="project images and recordings/Profile.jpg" alt="Maria Greanias Headshot" class="headshot">
+        <div class="headshot-caption">Maria Greanias</div>
+      </div>
+    <div class="highlight-box">
+      <div class="section-title">Why Work With Me?</div>
+      <div class="section-text">
+        I bring a balance of creativity and technical execution. 
+        I don’t just design how something looks — I think deeply 
+        about how it functions and how users experience it.
+      </div>
+      <div class="section-text">
+        I am detail-oriented, highly organized, and comfortable 
+        collaborating in fast-paced environments. I learn quickly, 
+        adapt easily, and take initiative on projects.
+      </div>
+      <div class="section-text">
+        Employers value my ability to translate ideas into clean, 
+        responsive digital products that feel intuitive and polished.
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX;
+  my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  cursorRing.style.left = rx + 'px';
+  cursorRing.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '20px';
+    cursor.style.height = '20px';
+    cursorRing.style.width = '60px';
+    cursorRing.style.height = '60px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '12px';
+    cursor.style.height = '12px';
+    cursorRing.style.width = '40px';
+    cursorRing.style.height = '40px';
+  });
+});
+</script>
+
+</body>
+</html>

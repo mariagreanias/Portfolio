@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maria Greanias — Digital Designer</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         *,
         *::before,
@@ -195,6 +193,12 @@
             animation: fadeUp 0.8s ease forwards 0.7s;
         }
 
+        .hero-buttons{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+}
+
         .hero-cta {
             display: inline-flex;
             align-items: center;
@@ -211,6 +215,17 @@
             opacity: 0;
             animation: fadeUp 0.8s ease forwards 0.9s;
             width: fit-content;
+        }
+
+        .secondary-cta{
+            background:transparent;
+            color:var(--ink);
+            border:1px solid var(--ink);
+        }
+
+        .secondary-cta:hover{
+            background:var(--ink);
+            color:var(--cream);
         }
 
         .hero-cta::after {
@@ -382,11 +397,17 @@
         }
 
         .stat-item {
-            padding: 36px 48px;
-            border-right: 1px solid rgba(255, 255, 255, 0.06);
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-        }
+    padding: 36px 48px;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* centers horizontally */
+    justify-content: center; /* centers vertically */
+    text-align: center;      /* centers text */
+}
 
         .stat-item:nth-child(3) {
             border-right: none;
@@ -526,6 +547,44 @@
             align-items: end;
         }
 
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-left: 60px;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--rust);
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-right {
+            align-items: flex-end;
+            text-align: right;
+        }
+
         .footer-label {
             font-size: 16px;
             letter-spacing: 0.3em;
@@ -635,9 +694,11 @@
         <div class="hero-left">
             <p class="hero-eyebrow"><span></span>Available for work · 2026</p>
             <h1 class="hero-name">Maria <span class="italic">Greanias.</span></h1>
-            <p class="hero-desc">Digital designer specializing in web and graphics. I craft intentional, expressive work
-                that lives at the intersection of form and function.</p>
-            <a href="webdesign.html" class="hero-cta">View my work</a>
+            <p class="hero-desc">I’m a digital designer passionate about building web and graphic experiences that feel purposeful and expressive. I care deeply about the details — making sure everything not only looks beautiful, but works seamlessly..</p>
+                <div class="hero-buttons">
+                    <a href="webdesign.html" class="hero-cta">View my work</a>
+                    <a href="aboutme.html" class="hero-cta secondary-cta">About Me</a>
+                  </div>
         </div>
         <div class="hero-right">
             <div class="hero-grid"></div>
@@ -655,11 +716,11 @@
     </section>
     <div class="stats-bar">
         <div class="stat-item">
-            <div class="stat-num">5<span>+</span></div>
+            <div class="stat-num">3<span>+</span></div>
             <div class="stat-label">Years designing</div>
         </div>
         <div class="stat-item">
-            <div class="stat-num">40<span>+</span></div>
+            <div class="stat-num">20<span>+</span></div>
             <div class="stat-label">Projects delivered</div>
         </div>
         <div class="stat-item">
@@ -674,15 +735,18 @@
         <div class="skills-grid">
             <div class="skill-card" data-num="1">
                 <h3 class="skill-title">Web Design</h3>
-                <p class="skill-desc">Designing digital experiences that are as beautiful as they are usable.</p>
+                <p class="skill-desc">I design websites that feel intuitive and engaging — where thoughtful structure,
+                    strong visuals, and seamless interaction come together naturally.</p>
             </div>
             <div class="skill-card" data-num="2">
                 <h3 class="skill-title">Graphic Design</h3>
-                <p class="skill-desc">Creating visual identities and collateral with clarity and personality.</p>
+                <p class="skill-desc">I create visual work that communicates clearly and confidently, blending
+                    typography, layout, and imagery into designs with personality and purpose.</p>
             </div>
             <div class="skill-card" data-num="3">
                 <h3 class="skill-title">Brand Identity</h3>
-                <p class="skill-desc">Building cohesive brand systems that give companies a lasting presence.</p>
+                <p class="skill-desc">I build brand systems that feel cohesive and lasting — helping ideas
+                    take shape through consistent visuals and intentional storytelling.</p>
             </div>
         </div>
     </section>
@@ -698,14 +762,22 @@
         </div>
     </section>
     <footer>
-        <div>
-            <p class="footer-label">Let's make something together</p>
-            <a href="mailto:hello@mariagreanias.com" class="footer-email">Say hello →</a>
+        <div class="footer-left">
+            <p class="footer-label">Explore</p>
+            <div class="footer-links">
+                <a href="webdesign.html">Work</a>
+                <a href="aboutme.html">About</a>
+                <a href="resume.html">Résumé</a>
+            </div>
         </div>
-        <div class="footer-logo">MG</div>
+    
+        <div class="footer-center">
+            <p class="footer-label">Let's make something together</p>
+            <a href="aboutme.html" class="footer-email">Learn more about me →</a>
+        </div>
+    
         <div class="footer-bottom">
             <p class="footer-copy">© 2026 Maria Greanias</p>
-            <div class="footer-socials"><a href="#">LinkedIn</a><a href="#">Behance</a><a href="#">Instagram</a></div>
         </div>
     </footer>
     <script>
