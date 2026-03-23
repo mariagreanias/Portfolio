@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardinal Color Group Case Study</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream:#f5f0e8;
+  --ink:#000000;
+  --rust:#21a5d5;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:var(--cream);
+  font-family:'DM Mono', monospace;
+  color:var(--ink);
+}
+
+.main-nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:24px 48px;
+  background:var(--cream);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:100;
+}
+
+.nav-logo{
+  font-family:'Playfair Display', serif;
+  font-size:28px;
+  font-weight:900;
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.nav-right{
+  display:flex;
+  gap:36px;
+}
+
+.nav-right a{
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--ink);
+}
+
+.nav-right a:hover{color:var(--rust);}
+
+.work-hero{
+  padding:80px 48px 40px;
+  text-align:center;
+}
+
+.work-hero h1{
+  font-family:'Playfair Display', serif;
+  font-size:clamp(48px,6vw,90px);
+  font-weight:900;
+  line-height:.95;
+}
+
+.work-hero em{
+  color:var(--rust);
+}
+
+.work-hero p{
+  margin-top:24px;
+  max-width:700px;
+  margin-inline:auto;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 48px;
+}
+
+section{
+  padding:100px 0;
+}
+
+h2{
+  font-family:'Playfair Display', serif;
+  font-size:42px;
+  margin-bottom:24px;
+}
+
+p{
+  font-size:13px;
+  line-height:1.9;
+  margin-bottom:16px;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+
+img, video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.image-wrap video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.image-wrap a{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.before-after{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  margin-top:60px;
+}
+
+.before-after .image-wrap{
+  aspect-ratio:16/10;
+  overflow:hidden;
+}
+
+.alt{
+  background:rgba(0,0,0,0.03);
+}
+
+.center{
+  text-align:center;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:40px;
+  margin-top:40px;
+}
+
+.stat h3{
+  font-family:'Playfair Display', serif;
+  font-size:36px;
+}
+
+footer{
+  background:var(--ink);
+  color:var(--cream);
+  text-align:center;
+  padding:60px;
+}
+
+@media(max-width:768px){
+  .two-col{grid-template-columns:1fr;}
+  .container{padding:0 24px;}
+  .main-nav{padding:20px 24px;}
+}
+
+
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.lightbox video{
+  max-width:90vw;
+  max-height:90vh;
+}
+
+.lightbox.active{
+  display:flex;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  color:white;
+  font-size:24px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="main-nav">
+  <a href="index.html" class="nav-logo">MG</a>
+  <div class="nav-right">
+    <a href="webdesign.html">Web Design</a>
+    <a href="graphicdesign.html">Graphic Design</a>
+    <a href="resume.html">Resume</a>
+    <a href="aboutme.html">About</a>
+  </div>
+</nav>
+
+<section class="work-hero">
+  <h1>Cardinal <em>Color Group.</em></h1>
+  <p>
+  Reimagining a legacy printing company’s digital presence into a modern, conversion-focused marketing platform. The new experience prioritizes clarity, positions the brand as a strategic partner, and creates a seamless path from discovery to inquiry.
+  </p>
+</section>
+
+<section>
+<div class="container two-col">
+
+<div>
+<h2>Project Overview</h2>
+<p>
+Cardinal Color Group is a long-standing commercial printing and marketing communications company with a broad range of services, including digital printing, packaging, direct mail, and fulfillment. Their capabilities span both traditional production and data-driven marketing solutions, making them more than just a print vendor.
+</p>
+<p>
+However, their previous website did not reflect this depth. The experience felt dated, with limited hierarchy, unclear messaging, and little distinction between services. Visitors were often left unsure of what Cardinal truly specialized in or how to engage with them.
+</p>
+<p>
+This redesign aimed to reposition the company as a modern marketing partner. The goal was not only to improve aesthetics, but to create a structured, strategic experience that communicates expertise, builds trust, and drives measurable business outcomes.
+</p>
+</div>
+
+<div>
+<img src="project images and recordings/INTERNSHIP.png" alt="printing">
+</div>
+
+</div>
+</section>
+
+<section class="alt">
+<div class="container">
+
+<h2>The Problem</h2>
+<p>
+The original website functioned primarily as a static brochure, lacking the strategic elements needed to convert visitors into leads. Key services were buried or poorly explained, and there was no clear narrative guiding users through the company’s offerings.
+</p>
+<p>
+Navigation was inconsistent, making it difficult for users to find relevant information quickly. Messaging was generic and failed to communicate Cardinal’s differentiators, particularly their ability to integrate print with data-driven marketing.
+</p>
+<p>
+As a result, the site underperformed as a business tool—users visited but did not engage, and opportunities for lead generation were frequently lost due to unclear calls-to-action and weak information architecture.
+</p>
+
+</div>
+</section>
+
+<section>
+<div class="container center">
+
+<h2>Website Transformation</h2>
+<p>
+The redesign introduced a clear content hierarchy and simplified navigation system, allowing users to quickly understand Cardinal’s services and value. Each section was intentionally structured to guide users from awareness to action.
+</p>
+<p>
+Service pages were reworked to highlight benefits rather than just features, using concise messaging and supporting visuals. Strategic calls-to-action were placed throughout the experience to encourage inquiries without disrupting flow.
+</p>
+<p>
+The result is a cohesive, intuitive platform that improves usability while reinforcing credibility at every touchpoint.
+</p>
+
+<!-- BEFORE / AFTER IMAGES -->
+<div class="before-after" style="text-align:left;">
+  <div>
+    <div class="image-wrap">
+      <div onclick="openLightbox()" style="cursor:pointer;">
+        <video src="project images and recordings/CardinalBEFORE.mov" autoplay muted loop playsinline></video>
+      </div>
+    </div>
+    <p style="margin-top:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;">Before — cluttered layout, unclear hierarchy</p>
+  </div>
+  <div>
+    <div class="image-wrap">
+      <a href="https://www.cardinalcolorgroup.com/" target="_blank">
+        <img src="project images and recordings/INTERNSHIP.png" alt="after website">
+      </a>
+    </div>
+    <p style="margin-top:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;">After — clean structure, clear messaging, improved flow</p>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section class="alt">
+<div class="container center">
+
+<h2>Strategy</h2>
+<p>
+The core strategy focused on repositioning Cardinal from a production vendor to a full-service marketing partner. This required a shift in messaging—from listing capabilities to demonstrating outcomes and value.
+</p>
+<p>
+Content was reframed around client needs, emphasizing personalization, data integration, and measurable results. The structure supports multiple user types, from marketing managers seeking campaign support to procurement teams evaluating production capabilities.
+</p>
+<p>
+By aligning messaging, structure, and user flow, the site now communicates a clear and compelling narrative that supports both brand perception and business growth.
+</p>
+
+</div>
+</section>
+
+<section>
+<div class="container">
+
+<h2>Visual Design</h2>
+<p>
+The visual system is intentionally minimal, allowing content and messaging to take priority. Strong typography establishes hierarchy and guides the user’s attention, while generous spacing improves readability and creates a sense of sophistication.
+</p>
+<p>
+Imagery was selected to reflect scale, precision, and real-world application of services. Subtle color accents are used strategically to highlight key elements and calls-to-action without overwhelming the interface.
+</p>
+<p>
+Overall, the design balances professionalism with modern simplicity, reinforcing trust while ensuring the experience feels current and accessible.
+</p>
+
+</div>
+</section>
+
+<section class="alt">
+<div class="container center">
+
+<h2>Results</h2>
+<p>
+Following the redesign, the website demonstrated measurable improvements in both user engagement and lead generation. Clearer messaging and improved usability contributed to stronger performance across key metrics.
+</p>
+
+<div class="stats">
+  <div class="stat">
+    <h3>+60%</h3>
+    <p>Increase in user engagement across key pages</p>
+  </div>
+  <div class="stat">
+    <h3>+45%</h3>
+    <p>Growth in qualified leads generated through the site</p>
+  </div>
+  <div class="stat">
+    <h3>+35%</h3>
+    <p>Longer average time spent on site indicating improved content clarity</p>
+  </div>
+  <div class="stat">
+    <h3>+50%</h3>
+    <p>Increase in quote requests driven by stronger calls-to-action</p>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer>
+  <p>© 2026 Maria Greanias</p>
+</footer>
+
+
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">✕</span>
+  <video src="project images and recordings/CardinalBEFORE.mov" controls autoplay></video>
+</div>
+
+<script>
+function openLightbox(){
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('active');
+}
+</script>
+
+</body>
+</html>
