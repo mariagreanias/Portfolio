@@ -162,6 +162,21 @@ body{
   line-height: 1.9;
 }
 
+.case-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.case-btn:hover {
+  background: #333;
+}
+
 /* Responsive */
 @media(max-width: 768px){
   .featured-card {
@@ -266,11 +281,11 @@ footer a{
 
 <section class="featured-project">
 
-  <a href="https://www.cardinalcolorgroup.com/" target="_blank" class="featured-card">
+  <div class="featured-card">
 
-    <div class="featured-img">
+    <a href="https://www.cardinalcolorgroup.com/" target="_blank" class="featured-img">
       <img src="project images and recordings/INTERNSHIP.png" alt="Summer Internship Project">
-    </div>
+    </a>
 
     <div class="featured-meta">
       <div class="featured-label">FEATURED PROJECT — Summer Internship</div>
@@ -278,9 +293,11 @@ footer a{
       <div class="featured-desc">
         Over the 25' Summer, I was very grateful and fortunate to work alongside with Links Technology Solutions, getting to be in charge of the redesign of a clients website. It was such an amazing time and experience. It was the perfect environment and helped me realize that it was exactly what I was looking for in a career.
       </div>
+
+      <a href="casestudy.html" class="case-btn">View Case Study</a>
     </div>
 
-  </a>
+  </div>
 
 </section>
 
