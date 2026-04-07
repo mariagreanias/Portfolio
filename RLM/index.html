@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricci's Landscape Management | Luxury Outdoor Spaces</title>
+  <meta
+    name="description"
+    content="Ricci's Landscape Management creates high-end outdoor spaces for commercial and residential properties across Northwest Indiana."
+  />
+
+  <style>
+    :root {
+      --bg: #fbf6f3;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-strong: #ffffff;
+      --text: #231111;
+      --muted: #6f4a4a;
+      --line: rgba(120, 40, 40, 0.12);
+      --red-deep: #5a1a1a;
+      --red-mid: #8f2d2d;
+      --red-light: #c88a8a;
+      --red-soft: #f3dddd;
+      --red-accent: #8f2828;
+      --accent: #7a2020;
+      --accent-soft: rgba(179, 57, 57, 0.12);
+      --shadow: 0 22px 60px rgba(60, 10, 10, 0.12);
+      --shadow-soft: 0 12px 30px rgba(60, 10, 10, 0.08);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1220px;
+
+      --active-fill: #dbeafe;
+      --active: #2563eb;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(199, 90, 90, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(143, 45, 45, 0.08), transparent 26%),
+        linear-gradient(180deg, #fef9f7 0%, var(--bg) 100%);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    section.section {
+      padding: 88px 0;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(8px);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.75;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    h1 { font-size: clamp(3rem, 7vw, 6.4rem); }
+    h2 { font-size: clamp(2.2rem, 4vw, 3.6rem); }
+    h3 { font-size: clamp(1.4rem, 2.1vw, 2rem); }
+    p { margin: 0; color: var(--muted); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(248, 243, 238, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 220px;
+    }
+
+    .brand-logo {
+      height: 92px;
+      width: auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+
+    .nav a {
+      position: relative;
+      color: var(--red-deep);
+      padding: 6px 0;
+      opacity: 0.92;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 180ms ease;
+    }
+
+    .nav a:hover::after { transform: scaleX(1); }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 240px;
+      justify-content: flex-end;
+    }
+
+    .mobile-actions { display: none; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 13px 18px;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+
+    .btn-primary {
+      background: var(--red-accent);
+      color: #fff;
+      border-color: rgba(169, 67, 67, 0.12);
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.72);
+      border-color: var(--red-light);
+      color: var(--red-deep);
+    }
+
+    .btn-gold {
+      background: var(--red-mid);
+      color: #fff;
+      border-color: rgba(176, 50, 50, 0.12);
+    }
+
+    .hero {
+      padding: 34px 0 22px;
+    }
+
+    .hero-shell {
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.62));
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 24% 18%, rgba(184,154,98,0.12), transparent 18%),
+        radial-gradient(circle at 72% 28%, rgba(125,145,134,0.12), transparent 20%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      padding: 34px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      padding: 10px 10px 10px 0;
+    }
+
+    .hero-copy p.lead {
+      font-size: 1.06rem;
+      max-width: 60ch;
+      margin-top: 18px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(30,36,33,0.09);
+      border-radius: 20px;
+      padding: 16px 18px;
+      box-shadow: 0 10px 30px rgba(19, 23, 21, 0.04);
+    }
+
+    .meta-card strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--red-deep);
+      margin-bottom: 4px;
+      font-family: Georgia, serif;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #3a0f0f;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: saturate(0.93) contrast(1.03);
+      opacity: 0.84;
+    }
+
+    .hero-card {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(83, 44, 44, 0.56);
+      color: #fff;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.13);
+    }
+
+    .hero-card strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #f4ead6;
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      color: var(--red-deep);
+      font-weight: 700;
+      font-size: 0.84rem;
+      border: 1px solid rgba(36, 30, 30, 0.08);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .section-head p {
+      max-width: 64ch;
+      margin-top: 12px;
+      line-height: 1.65;
+    }
+
+    .service-toggle { padding: 18px; }
+
+    .toggle-tabs {
+      display: inline-flex;
+      background: rgba(36, 30, 30, 0.05);
+      border: 1px solid rgba(36, 30, 30, 0.1);
+      border-radius: 999px;
+      padding: 6px;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .tab {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 800;
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(38, 54, 47, 0.18);
+    }
+
+    .service-copy {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service-item {
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.86);
+      border: 1px solid rgba(30,36,33,0.08);
+      font-weight: 700;
+      color: #28322d;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      line-height: 1.35;
+    }
+
+    .service-item::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px var(--accent-soft);
+      flex: 0 0 auto;
+    }
+
+    .service-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .side-card {
+      padding: 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #5a1a1a, #8f2d2d);
+      color: #fff;
+      min-height: 172px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .side-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -24% auto;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(255,255,255,0.17), transparent 60%);
+      border-radius: 50%;
+    }
+
+    .side-card p { color: rgba(255,255,255,0.78); }
+
+    .side-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 0.82rem;
+    }
+
+    .about-grid {
+      align-items: stretch;
+    }
+
+    .about-card {
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+      padding: 0;
+    }
+
+    .about-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .about-columns p {
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .truck-image {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      background: #fff;
+    }
+
+    .about-text {
+      padding: 26px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      border-radius: 18px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(30,36,33,0.08);
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      font-family: Georgia, serif;
+      color: var(--red-deep);
+      margin-bottom: 4px;
+    }
+
+    .badge-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .badge-images img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .badge-images img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.12);
+    }
+
+    .featured-projects { padding: 18px; }
+
+    .project-switcher {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .project-tab {
+      border: 1px solid rgba(30,36,33,0.12);
+      background: rgba(255,255,255,0.76);
+      color: var(--muted);
+      font-weight: 800;
+      padding: 11px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .project-tab.active {
+      background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(38, 54, 47, 0.18);
+    }
+
+    .featured-slider {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 18px;
+    }
+
+    .slider-rail {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      padding: 8px 11px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.8rem;
+    }
+
+    .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .thumb {
+      position: relative;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 92px;
+      background: #2a0f0f;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: transform 240ms ease, opacity 240ms ease;
+    }
+
+    .thumb.active img,
+    .thumb:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      transition: border-color 180ms ease;
+    }
+
+    .thumb.active::after { border-color: var(--red-light); }
+
+    .project-media {
+      position: relative;
+      min-height: 430px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #2a0f0f;
+    }
+
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.93;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: auto 20px 20px 20px;
+      padding: 18px;
+      border-radius: 18px;
+      color: #fff;
+      background: rgba(42, 15, 15, 0.58);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .why-card { padding: 22px; }
+
+    .why-card .leadline {
+      display: inline-block;
+      font-weight: 800;
+      color: var(--red-deep);
+      margin-bottom: 10px;
+    }
+
+    .step-card {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+    }
+
+    .step-number {
+      position: absolute;
+      right: 14px;
+      top: -18px;
+      font-size: 7rem;
+      font-family: Georgia, serif;
+      color: rgba(38,54,47,0.08);
+      font-weight: 700;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .testimonial-shell {
+      padding: 18px;
+    }
+
+    .review-layout {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .review-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 10px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(30,36,33,0.08);
+    }
+
+    .review-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(30,36,33,0.12);
+      background: #fff;
+      color: var(--red-deep);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .review-dot:hover {
+      transform: translateY(-1px);
+    }
+
+    .review-dot.active {
+      background: linear-gradient(135deg, var(--red-deep), var(--red-mid));
+      color: #fff;
+      box-shadow: 0 10px 18px rgba(38,54,47,0.18);
+      transform: translateX(4px);
+    }
+
+    .review-card {
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+      border: 1px solid rgba(30,36,33,0.08);
+    }
+
+    .review-quote {
+      font-size: clamp(1.1rem, 2vw, 1.55rem);
+      line-height: 1.75;
+      color: #2c3531;
+      max-width: 64ch;
+      margin-top: 14px;
+    }
+
+    .review-name {
+      margin-top: 12px;
+      font-weight: 800;
+      color: var(--red-deep);
+      letter-spacing: 0.02em;
+    }
+
+    .review-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .gallery {
+      column-count: 4;
+      column-gap: 4px;
+    }
+
+    .gallery img {
+      width: 100%;
+      margin: 4px 0;
+      display: block;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      cursor: pointer;
+      border-radius: 12px;
+      break-inside: avoid;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      opacity: 0.92;
+    }
+
+    .financing {
+      background: linear-gradient(135deg, var(--red-deep), #3a0f0f);
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .financing::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(184,154,98,0.18), transparent 18%),
+        radial-gradient(circle at 78% 40%, rgba(255,255,255,0.09), transparent 20%);
+      pointer-events: none;
+    }
+
+    .financing .container { position: relative; }
+
+    .financing-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 26px 0;
+    }
+
+    .financing-copy p {
+      color: rgba(255,255,255,0.8);
+      max-width: 68ch;
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+
+    .financing-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .financing-badges span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .contact-card, .form-card { padding: 26px; }
+
+    .contact-line {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-pill {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(30,36,33,0.08);
+    }
+
+    .contact-pill strong {
+      display: block;
+      color: var(--red-deep);
+      margin-bottom: 4px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--red-deep);
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid rgba(30,36,33,0.14);
+      background: rgba(255,255,255,0.86);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 15px;
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .footer {
+      padding: 28px 0 44px;
+      color: var(--red-deep);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .muted-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .map-card,
+    .info-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(207, 216, 227, 0.9);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .map-card { padding: 14px; }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #e5eaf1;
+      border-radius: 999px;
+      padding: 7px 12px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .map-shell {
+      width: 100%;
+      aspect-ratio: 1.15 / 1;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-shell svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .county {
+      cursor: pointer;
+      transition: transform 160ms ease, filter 160ms ease, fill 160ms ease, stroke 160ms ease;
+      transform-origin: center;
+      stroke: #ffffff;
+      stroke-width: 3;
+      stroke-linejoin: round;
+    }
+
+    .county:hover {
+      filter: brightness(1.03);
+      transform: scale(1.01);
+    }
+
+    .county:focus-visible {
+      outline: none;
+      stroke: var(--active);
+      stroke-width: 4;
+    }
+
+    .county.active {
+      fill: var(--active-fill);
+      stroke: var(--active);
+      stroke-width: 4;
+      filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.18));
+    }
+
+    .county-label {
+      font-size: 18px;
+      font-weight: 700;
+      fill: #0f172a;
+      pointer-events: none;
+      text-anchor: middle;
+      paint-order: stroke;
+      stroke: rgba(255, 255, 255, 0.75);
+      stroke-width: 6px;
+      stroke-linejoin: round;
+    }
+
+    .county-sub {
+      font-size: 12px;
+      fill: #475569;
+      pointer-events: none;
+      text-anchor: middle;
+      font-weight: 600;
+    }
+
+    .info-card {
+      padding: 18px;
+      min-height: 100%;
+    }
+
+    .info-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .selected-name {
+      display: inline-block;
+      margin: 8px 0 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 700;
+      border: 1px solid #dbeafe;
+    }
+
+    .city-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .city-list li {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e5eaf1;
+      font-weight: 600;
+    }
+
+    .hint {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid #e5eaf1;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .brand-partners {
+      width: 100%;
+      padding: 56px 20px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .brand-partners__header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .brand-partners__eyebrow {
+      margin: 0 0 8px;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6b7280;
+      font-weight: 600;
+    }
+
+    .brand-partners h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.1;
+    }
+
+    .brand-partners__rail {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .brand-partners__rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    .brand-card {
+      position: relative;
+      flex: 0 0 auto;
+      width: min(360px, 80vw);
+      aspect-ratio: 4 / 3;
+      border-radius: 24px;
+      overflow: hidden;
+      text-decoration: none;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      scroll-snap-align: start;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .brand-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .brand-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .brand-card__overlay {
+      position: absolute;
+      inset: auto 0 0 0;
+      padding: 20px;
+      color: #ffffff;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.06));
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brand-card__overlay strong {
+      font-size: 20px;
+    }
+
+    .brand-card__overlay span {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .brand-partners__controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    .brand-partners__controls button {
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      color: #111111;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .brand-partners__controls button:hover {
+      background: #f9fafb;
+      transform: translateY(-1px);
+    }
+
+    .desktop-controls {
+      display: flex;
+    }
+
+    .mobile-controls {
+      display: none;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .service-copy,
+      .featured-slider,
+      .contact-grid,
+      .financing-grid,
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual { min-height: 480px; }
+
+      .hero-meta,
+      .stat-grid,
+      .grid-3,
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gallery { column-count: 3; }
+
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .nav { display: none; }
+      .top-actions { display: none; }
+
+      .mobile-actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      .brand { min-width: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding-top: 18px; }
+
+      .hero-grid,
+      section.section {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .gallery { column-count: 2; }
+
+      .hero-grid,
+      .about-text,
+      .service-toggle,
+      .featured-projects,
+      .featured-slider,
+      .review-layout,
+      .contact-card,
+      .form-card {
+        padding: 18px;
+      }
+
+      .hero-meta,
+      .stat-grid,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .gallery-thumbs,
+      .service-list,
+      .form-row,
+      .about-columns {
+        grid-template-columns: 1fr;
+      }
+
+      .review-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .review-nav {
+        flex-direction: row;
+        padding: 14px;
+      }
+
+      .toggle-tabs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tab { width: 100%; }
+
+      .mobile-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .mobile-actions .btn { width: 100%; }
+
+      .hero-shell { border-radius: 24px; }
+
+      .hero-copy p.lead { font-size: 1rem; }
+
+      .truck-image { min-height: 340px; }
+
+      .map-shell { aspect-ratio: 1 / 1; }
+
+      .desktop-controls { display: none; }
+      .mobile-controls { display: flex; }
+      .brand-partners__header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .badge-images {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .gallery { column-count: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top" aria-label="Ricci's Landscape Management home">
+        <img src="images/RLM.png" alt="Ricci's Landscape Management logo" class="brand-logo">
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#commercial">Commercial</a>
+        <a href="#residential">Residential</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="top-actions">
+        <a class="btn btn-outline" href="#contact">My Account</a>
+        <a class="btn btn-gold" href="tel:+12195550123">Phone</a>
+      </div>
+
+      <div class="mobile-actions">
+        <a class="btn btn-outline" href="#contact">My Account</a>
+        <a class="btn btn-gold" href="tel:+12195550123">Phone</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-shell">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Luxury landscape design and build</span>
+            <h1>Outdoor Spaces Worth Stepping Outside For</h1>
+            <p class="lead">
+              Ricci's Landscape Management creates refined outdoor environments for homes and commercial properties across Northwest Indiana. From custom design and construction to ongoing maintenance, our work is built to feel elevated, timeless, and easy to enjoy.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">Start Your Project</a>
+              <a class="btn btn-outline" href="tel:+12195550123">Call Now</a>
+            </div>
+
+            <div class="hero-meta">
+              <div class="meta-card">
+                <strong>1994</strong>
+                <p>Serving Northwest Indiana with local expertise and trust.</p>
+              </div>
+              <div class="meta-card">
+                <strong>65+</strong>
+                <p>Skilled professionals across design, build, and maintenance.</p>
+              </div>
+              <div class="meta-card">
+                <strong>Full Service</strong>
+                <p>Commercial and residential outdoor solutions in one team.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Luxury outdoor landscape visual">
+            <img
+              src="images/MAIN.png"
+              alt="Luxury outdoor living space with patio and landscaping"
+            />
+            <div class="hero-card">
+              <strong>Featured Capability</strong>
+              <h3>Modern outdoor living that complements your home or property.</h3>
+              <div class="badges">
+                <span class="badge">Custom Design</span>
+                <span class="badge">Hardscapes</span>
+                <span class="badge">Lighting</span>
+                <span class="badge">Maintenance</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="commercial">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Services</span>
+            <h2>NWI Landscaping Services</h2>
+          </div>
+        </div>
+
+        <div class="panel service-toggle">
+          <div class="toggle-tabs" role="tablist" aria-label="Commercial and residential services toggle">
+            <button class="tab active" data-target="commercial-services" type="button">Commercial</button>
+            <button class="tab" data-target="residential-services" type="button">Residential</button>
+          </div>
+
+          <div class="service-copy">
+            <div>
+              <div class="service-list" id="commercial-services">
+                <div class="service-item">Audio &amp; Lighting Services</div>
+                <div class="service-item">Drainage Solutions</div>
+                <div class="service-item">Fertilization Services</div>
+                <div class="service-item">Grounds Maintenance</div>
+                <div class="service-item">Irrigation Services</div>
+                <div class="service-item">Landscaping</div>
+                <div class="service-item">Mosquito, Tick &amp; Pest Control</div>
+                <div class="service-item">Snow &amp; Ice Management</div>
+              </div>
+
+              <div class="service-list" id="residential-services" style="display:none;">
+                <div class="service-item">New Lawn Installations</div>
+                <div class="service-item">Paver Patios</div>
+                <div class="service-item">Outdoor Fire Pits</div>
+                <div class="service-item">Irrigation Systems</div>
+                <div class="service-item">Outdoor Kitchens</div>
+                <div class="service-item">Water Features</div>
+                <div class="service-item">Pool Landscaping</div>
+                <div class="service-item">Audio &amp; Lighting Services</div>
+                <div class="service-item">Outdoor Fireplaces</div>
+                <div class="service-item">Permeable Pavers</div>
+                <div class="service-item">Drainage Solutions</div>
+                <div class="service-item">Lawn &amp; Landscape Maintenance</div>
+                <div class="service-item">Fertilization &amp; Grub Control</div>
+                <div class="service-item">Mosquito, Tick &amp; Pest Control</div>
+              </div>
+            </div>
+
+            <div class="service-side">
+              <div class="side-card">
+                <span class="eyebrow" style="color:#f4ddba;">Built for bigger properties</span>
+                <h3 style="margin-top:10px;">A high-touch process for every outdoor space.</h3>
+                <p style="margin-top:12px;">Use this area to feature a truck photo with branding or a dramatic image of the team on site. The layout is designed to feel premium and modern.</p>
+                <div class="side-list">
+                  <span class="mini-chip">Commercial</span>
+                  <span class="mini-chip">Residential</span>
+                  <span class="mini-chip">Design Build</span>
+                  <span class="mini-chip">Maintenance</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">About</span>
+            <h2>Rooted in Northwest Indiana Since 1994</h2>
+
+            <div class="about-columns">
+              <p>
+                Founded in 1994, Ricci's Landscape Management has grown from a neighborhood lawn service into one of Northwest Indiana's most trusted full-service landscape companies. What began with founder Dean Ricci mowing lawns in Lakes of the Four Seasons at just 10 years old has evolved into a team of more than 65 professionals delivering landscape design, construction, maintenance, irrigation, lighting, snow removal, and outdoor solutions for residential and commercial properties across the region.
+              </p>
+
+              <p>
+                For over three decades, RLM has remained committed to craftsmanship, professional training, and strong community ties. Through continued education, industry leadership, and meaningful local involvement, the team takes pride in delivering thoughtful outdoor spaces and dependable service that clients can rely on year after year.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 about-grid">
+          <div class="panel about-card">
+            <img
+              src="images/TRUCK.png"
+              alt="truck with Ricci's Landscape Management branding"
+              class="truck-image"
+            />
+          </div>
+
+          <div class="panel about-text">
+            <span class="eyebrow">Craftsmanship and community</span>
+            <h3 style="margin-top:10px;">A legacy built on training, quality, and dependable service.</h3>
+            <p style="margin-top:14px;">
+              RLM's success is rooted in professional pride, local knowledge, and a team culture focused on doing the work the right way. From large-scale commercial maintenance to luxury residential installations, every project is approached with the same care and attention to detail.
+            </p>
+
+            <div class="stat-grid">
+              <div class="stat"><strong>30+ years</strong><p>Proven local experience.</p></div>
+              <div class="stat"><strong>65+ pros</strong><p>Skilled field and office team.</p></div>
+              <div class="stat"><strong>Local roots</strong><p>Built in Northwest Indiana.</p></div>
+            </div>
+
+            <div class="badges" style="margin-top:18px;">
+              <span class="badge">Licensed and Insured</span>
+              <span class="badge">Locally Owned</span>
+              <span class="badge">Commercial + Residential</span>
+            </div>
+
+            <div class="badge-images">
+              <img src="images/TEAM/TEAM1.png" alt="Work example 1">
+              <img src="images/TEAM/Team2.png" alt="Work example 2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="residential">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Featured Projects</span>
+            <h2>See What We Have Been Building in Your Neighborhood</h2>
+            <p>Featured projects are shown one at a time so the work feels more premium and easier to browse.</p>
+          </div>
+        </div>
+
+        <div class="panel featured-projects">
+          <div class="project-switcher" role="tablist" aria-label="Featured projects">
+            <button class="project-tab active" data-project="0" type="button">Project 01</button>
+            <button class="project-tab" data-project="1" type="button">Project 02</button>
+            <button class="project-tab" data-project="2" type="button">Project 03</button>
+          </div>
+
+          <div class="featured-slider">
+            <div class="slider-rail">
+              <span class="eyebrow">Project spotlight</span>
+              <h3 id="project-title">Modern Patio Retreat</h3>
+              <p id="project-copy">A refined backyard transformation.</p>
+
+              <div class="project-tags" id="project-tags"></div>
+              <div class="gallery-thumbs" id="project-thumbs"></div>
+
+              <div class="hero-actions" style="margin-top:18px;">
+                <a class="btn btn-primary" id="project-link" href="https://www.rlminc.com/projects/featured-project-1/" target="_blank" rel="noopener">View Project</a>
+                <a class="btn btn-outline" href="#contact">Start Your Project</a>
+              </div>
+            </div>
+
+            <div class="project-media">
+              <img
+                id="project-image"
+                src="images/Proj1/1.png"
+                alt="Featured landscape project"
+              />
+              <div class="project-overlay">
+                <div class="eyebrow" style="color:#f4ddba;">Featured project</div>
+                <h3 id="project-overlay-title" style="margin-top:5px;">Project 1</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Why choose us</span>
+            <h2>Why Choose RLM</h2>
+            <p>Trimmed for a luxury feel, with concise messaging and stronger visual hierarchy.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="panel why-card">
+            <span class="leadline">Custom Landscape Design</span>
+            <p>Every project is thoughtfully designed around your property, your lifestyle, and your vision for outdoor living.</p>
+          </div>
+
+          <div class="panel why-card">
+            <span class="leadline">NWI Native Expertise</span>
+            <p>Proudly serving Northwest Indiana since 1994, our team understands the region’s climate, soil, and seasonal conditions to ensure landscapes that thrive.</p>
+          </div>
+
+          <div class="panel why-card">
+            <span class="leadline">Experienced Craftsmanship</span>
+            <p>Our licensed and insured professionals bring more than three decades of hands-on expertise and attention to detail to every project.</p>
+          </div>
+
+          <div class="panel why-card">
+            <span class="leadline">Dedicated Client Experience</span>
+            <p>From initial consultation to final walkthrough, we prioritize communication, professionalism, and service you can trust.</p>
+          </div>
+
+          <div class="panel why-card">
+            <span class="leadline">Flexible Financing Options</span>
+            <p>Through our partnership with HFS Financial, we offer financing options to help make your outdoor project more accessible.</p>
+          </div>
+
+          <div class="panel why-card" style="background: linear-gradient(135deg, #5a1a1a, #2a0f0f); color:#fff;">
+            <span class="leadline" style="color:#f5dfc4;">Premium Results</span>
+            <p style="color:rgba(255,255,255,0.78);">A refined outdoor experience that feels built for high-end homes and properties.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Process</span>
+            <h2>Design. Build. Enjoy.</h2>
+            <p>Big numbers sit behind the copy for a more modern, architectural feel.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="panel step-card">
+            <div class="step-number">1</div>
+            <span class="eyebrow">Design</span>
+            <h3 style="margin-top:10px;">Start with a plan that feels intentional.</h3>
+            <p style="margin-top:12px;">We shape the vision around the architecture, setting, and use of the space.</p>
+          </div>
+
+          <div class="panel step-card">
+            <div class="step-number">2</div>
+            <span class="eyebrow">Build</span>
+            <h3 style="margin-top:10px;">Expert crews bring the design to life.</h3>
+            <p style="margin-top:12px;">Precision, scheduling, and craftsmanship keep the project moving smoothly.</p>
+          </div>
+
+          <div class="panel step-card">
+            <div class="step-number">3</div>
+            <span class="eyebrow">Enjoy</span>
+            <h3 style="margin-top:10px;">Step into a space made to last.</h3>
+            <p style="margin-top:12px;">Your finished landscape is ready for daily living, hosting, and every season.</p>
+          </div>
+        </div>
+
+        <div class="hero-actions" style="justify-content:center; margin-top:26px;">
+          <a class="btn btn-primary" href="#contact">Start Your Project</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Testimonials</span>
+            <h2>Creating Landscapes Our Neighbors Love</h2>
+            <p>One review at a time keeps the section polished and easier to read on mobile.</p>
+          </div>
+        </div>
+
+        <div class="panel testimonial-shell">
+          <div class="review-layout">
+            <div class="review-nav" id="review-nav" aria-label="Review selector"></div>
+
+            <article class="review-card" aria-live="polite">
+              <div>
+                <span class="eyebrow">Client review</span>
+                <div class="review-quote" id="review-quote"></div>
+              </div>
+
+              <div>
+                <div class="review-name" id="review-name"></div>
+                <div class="review-actions">
+                  <a class="btn btn-outline" href="#contact">Leave a Review</a>
+                  <a class="btn btn-primary" href="#resources">Read More</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Gallery</span>
+            <h2>Beautiful Landscapes, Built to Last</h2>
+            <p>A curated gallery feed helps reinforce the premium look and gives the site visual rhythm.</p>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <img src="GALLERY/1.png" alt="Gallery image 1">
+          <img src="GALLERY/2.png" alt="Gallery image 2">
+          <img src="GALLERY/3.png" alt="Gallery image 3">
+          <img src="GALLERY/4.png" alt="Gallery image 4">
+          <img src="GALLERY/5.png" alt="Gallery image 5">
+          <img src="GALLERY/6.png" alt="Gallery image 6">
+          <img src="GALLERY/7.png" alt="Gallery image 7">
+          <img src="GALLERY/8.png" alt="Gallery image 8">
+          <img src="GALLERY/9.png" alt="Gallery image 9">
+          <img src="GALLERY/10.png" alt="Gallery image 10">
+          <img src="GALLERY/11.png" alt="Gallery image 11">
+          <img src="GALLERY/12.png" alt="Gallery image 12">
+          <img src="GALLERY/13.png" alt="Gallery image 13">
+          <img src="GALLERY/14.png" alt="Gallery image 14">
+          <img src="GALLERY/15.png" alt="Gallery image 15">
+          <img src="GALLERY/16.png" alt="Gallery image 16">
+          <img src="GALLERY/17.png" alt="Gallery image 17">
+          <img src="GALLERY/18.png" alt="Gallery image 18">
+          <img src="GALLERY/19.png" alt="Gallery image 19">
+          <img src="GALLERY/20.png" alt="Gallery image 20">
+          <img src="GALLERY/21.png" alt="Gallery image 21">
+          <img src="GALLERY/22.png" alt="Gallery image 22">
+          <img src="GALLERY/23.png" alt="Gallery image 23">
+          <img src="GALLERY/24.png" alt="Gallery image 24">
+          <img src="GALLERY/25.png" alt="Gallery image 25">
+          <img src="GALLERY/26.png" alt="Gallery image 26">
+          <img src="GALLERY/27.png" alt="Gallery image 27">
+          <img src="GALLERY/28.png" alt="Gallery image 28">
+          <img src="GALLERY/29.png" alt="Gallery image 29">
+          <img src="GALLERY/30.png" alt="Gallery image 30">
+          <img src="GALLERY/31.png" alt="Gallery image 31">
+          <img src="GALLERY/32.png" alt="Gallery image 32">
+          <img src="GALLERY/33.png" alt="Gallery image 33">
+          <img src="GALLERY/34.png" alt="Gallery image 34">
+          <img src="GALLERY/35.png" alt="Gallery image 35">
+          <img src="GALLERY/36.png" alt="Gallery image 36">
+          <img src="GALLERY/37.png" alt="Gallery image 37">
+          <img src="GALLERY/38.png" alt="Gallery image 38">
+          <img src="GALLERY/39.png" alt="Gallery image 39">
+          <img src="GALLERY/40.png" alt="Gallery image 40">
+          <img src="GALLERY/41.png" alt="Gallery image 41">
+          <img src="GALLERY/42.png" alt="Gallery image 42">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="service-area">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Service Area</span>
+            <h2>Northwest Indiana Coverage</h2>
+            <p>Select a county to see the cities served in that area.</p>
+          </div>
+        </div>
+
+        <div class="map-layout">
+          <section class="map-card">
+            <div class="legend" aria-label="Map legend">
+              <span><i class="dot" style="background:#93c5fd"></i> Selected county</span>
+              <span><i class="dot" style="background:#bfdbfe"></i> Hover state</span>
+            </div>
+
+            <div class="map-shell">
+              <svg viewBox="0 0 1000 820" role="img" aria-label="Stylized map of Northwest Indiana counties" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#f8fbff" />
+                    <stop offset="100%" stop-color="#eef4ff" />
+                  </linearGradient>
+                </defs>
+
+                <rect x="0" y="0" width="1000" height="820" fill="url(#bgGrad)" />
+
+                <g id="counties">
+                  <path class="county" data-county="Lake" fill="#dbeafe" d="M 70 120 L 330 120 L 310 245 L 160 260 L 80 210 Z"></path>
+                  <path class="county" data-county="Porter" fill="#e0f2fe" d="M 320 125 L 560 130 L 545 285 L 305 268 Z"></path>
+                  <path class="county" data-county="LaPorte" fill="#dbeafe" d="M 548 126 L 900 126 L 885 270 L 550 285 Z"></path>
+                  <path class="county" data-county="Jasper" fill="#e0e7ff" d="M 255 285 L 545 290 L 525 500 L 235 485 Z"></path>
+                  <path class="county" data-county="Berrien" fill="#ede9fe" d="M 545 290 L 888 272 L 875 515 L 530 502 Z"></path>
+                </g>
+
+                <g>
+                  <text x="195" y="185" class="county-label">Lake</text>
+                  <text x="195" y="214" class="county-sub">County</text>
+
+                  <text x="435" y="200" class="county-label">Porter</text>
+                  <text x="435" y="229" class="county-sub">County</text>
+
+                  <text x="725" y="197" class="county-label">LaPorte</text>
+                  <text x="725" y="226" class="county-sub">County</text>
+
+                  <text x="392" y="402" class="county-label">Jasper</text>
+                  <text x="392" y="431" class="county-sub">County</text>
+
+                  <text x="710" y="398" class="county-label">Berrien</text>
+                  <text x="710" y="427" class="county-sub">County</text>
+                </g>
+
+                <g opacity="0.55">
+                  <text x="40" y="785" font-size="14" fill="#64748b">Schematic county layout for presentation and interaction</text>
+                </g>
+              </svg>
+            </div>
+          </section>
+
+          <aside class="info-card">
+            <h2>County details</h2>
+            <div class="selected-name" id="selectedName">Select a county</div>
+            <div id="cityContent" class="hint" aria-live="polite">Click Lake, Porter, Jasper, LaPorte, or Berrien to display the cities.</div>
+            <div class="footer-note"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section financing">
+      <div class="container">
+        <div class="financing-grid">
+          <div class="financing-copy">
+            <span class="eyebrow" style="color:#e7d4ab;">Financing</span>
+            <h2 style="margin-top:10px; color:#fff;">Flexible Financing Options</h2>
+            <p>At RLM, we offer financing through HFS Financial, which makes it easier to move forward with your landscape project, offering flexible options including no money down and no stage funding.</p>
+            <div class="financing-badges">
+              <span>No money down</span>
+              <span>No stage funding</span>
+              <span>Flexible options</span>
+              <span>Quick application</span>
+            </div>
+          </div>
+
+          <div>
+            <a class="btn btn-gold" href="#contact">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Contact</span>
+            <h2>Start Your Outdoor Transformation Today</h2>
+            <p>Whether you’re looking to enhance your property’s curb appeal, maintain a healthy lawn, or create a beautiful outdoor living space, the team at Ricci’s Landscape Management is here to help.</p>
+            <p style="margin-top:14px;">Complete the form below to request a free estimate or connect with a member of our team.</p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="panel contact-card">
+            <h3>Request a free estimate</h3>
+            <p style="margin-top:10px;">Complete the form below to connect with a member of the team.</p>
+
+            <div class="contact-line">
+              <div class="contact-pill">
+                <strong>Phone</strong>
+                <a href="tel:+12195550123">(219) 555-0123</a>
+              </div>
+              <div class="contact-pill">
+                <strong>Email</strong>
+                <a href="mailto:info@rlminc.com">info@rlminc.com</a>
+              </div>
+              <div class="contact-pill">
+                <strong>Account Portal</strong>
+                <a href="#contact">My Account</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel form-card">
+            <form>
+              <div class="form-row">
+                <div class="field">
+                  <label for="first">First Name</label>
+                  <input id="first" type="text" placeholder="First name" />
+                </div>
+                <div class="field">
+                  <label for="last">Last Name</label>
+                  <input id="last" type="text" placeholder="Last name" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="name@example.com" />
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" type="tel" placeholder="(219) 555-0123" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label for="service-type">Project Type</label>
+                  <select id="service-type">
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Maintenance</option>
+                    <option>Design Build</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="upload">Upload Photo</label>
+                  <input id="upload" type="file" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="message">Project Details</label>
+                <textarea id="message" placeholder="Tell us about the space, goals, and any must-have features."></textarea>
+              </div>
+
+              <div class="hero-actions" style="margin-top:8px;">
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="brand-partners">
+    <div class="brand-partners__header">
+      <div>
+        <p class="brand-partners__eyebrow">Partners</p>
+        <h2>Trusted and partnered with</h2>
+      </div>
+
+      <div class="brand-partners__controls desktop-controls">
+        <button type="button" id="scrollLeft" aria-label="Scroll left">‹</button>
+        <button type="button" id="scrollRight" aria-label="Scroll right">›</button>
+      </div>
+    </div>
+
+    <div class="brand-partners__rail" id="brandRail">
+      <a class="brand-card" href="https://inla.org/iah-certification/" target="_blank" rel="noreferrer">
+        <img src="images/partners/AH.png" alt="AH partner">
+        <span class="brand-card__overlay">
+          <strong>ACCREDITED HORTICULTURIST</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.aquascapeinc.com/professionals/" target="_blank" rel="noreferrer">
+        <img src="images/partners/AQUA.png" alt="AQUA partner">
+        <span class="brand-card__overlay">
+          <strong>AQUASCAPE</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.hydrawise.com/" target="_blank" rel="noreferrer">
+        <img src="images/partners/HUNTER.png" alt="HUNTER partner">
+        <span class="brand-card__overlay">
+          <strong>HUNTER & HYDRAWISE</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.cmha.org/" target="_blank" rel="noreferrer">
+        <img src="images/partners/ICPI.png" alt="ICPI partner">
+        <span class="brand-card__overlay">
+          <strong>ICPI</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://inla.org/" target="_blank" rel="noreferrer">
+        <img src="images/partners/INLA.png" alt="INLA partner">
+        <span class="brand-card__overlay">
+          <strong>INLA</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.mistaway.com/" target="_blank" rel="noreferrer">
+        <img src="images/partners/MIST.png" alt="MIST partner">
+        <span class="brand-card__overlay">
+          <strong>MISTAWAY</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.naturekast.com/" target="_blank" rel="noreferrer">
+        <img src="images/partners/NATURE.png" alt="NATURE partner">
+        <span class="brand-card__overlay">
+          <strong>NATUREKAST</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://www.ndspro.com/us/en" target="_blank" rel="noreferrer">
+        <img src="images/partners/NDS.jpg" alt="NDS partner">
+        <span class="brand-card__overlay">
+          <strong>NDS</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://nwinla.com/" target="_blank" rel="noreferrer">
+        <img src="images/partners/NWINLA.webp" alt="NWINLA partner">
+        <span class="brand-card__overlay">
+          <strong>NWINLA</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://unilock.com/find-contractor/" target="_blank" rel="noreferrer">
+        <img src="images/partners/UNILOCK.png" alt="UNILOCK partner">
+        <span class="brand-card__overlay">
+          <strong>UNILOCK</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+
+      <a class="brand-card" href="https://waclighting.com/applications/landscape/" target="_blank" rel="noreferrer">
+        <img src="images/partners/wac.png" alt="WAC partner">
+        <span class="brand-card__overlay">
+          <strong>WAC</strong>
+          <span>Visit partner ↗</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="brand-partners__controls mobile-controls">
+      <button type="button" id="scrollLeftMobile">Previous</button>
+      <button type="button" id="scrollRightMobile">Next</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="display:block; color:var(--red-deep); font-size:1rem; margin-bottom:4px;">Ricci's Landscape Management</strong>
+        <span class="muted-note">Luxury-inspired website concept built for a modern high-end presentation.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const services = document.querySelectorAll('.tab');
+    const commercial = document.getElementById('commercial-services');
+    const residential = document.getElementById('residential-services');
+
+    services.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        services.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const showCommercial = btn.dataset.target === 'commercial-services';
+        commercial.style.display = showCommercial ? 'grid' : 'none';
+        residential.style.display = showCommercial ? 'none' : 'grid';
+      });
+    });
+
+    const projects = [
+      {
+        title: 'Project 1',
+        link: 'https://www.rlminc.com/projects/featured-project-1/',
+        copy: 'A clean, contemporary poolside setting with structured plantings and premium finishes that keep the space polished from every angle.',
+        images: [
+          'images/Proj1/1.png',
+          'images/Proj1/2.png',
+          'images/Proj1/3.png',
+          'images/Proj1/4.png',
+          'images/Proj1/5.png',
+          'images/Proj1/6.png',
+          'images/Proj1/7.png',
+          'images/Proj1/8.png',
+          'images/Proj1/9.png',
+          'images/Proj1/10.png',
+          'images/Proj1/11.png',
+          'images/Proj1/12.png',
+          'images/Proj1/13.png'
+        ],
+        tags: ['Poolscape', 'Planting design', 'Premium finish']
+      },
+      {
+        title: 'Project 2',
+        link: 'https://www.rlminc.com/projects/featured-project-3/',
+        copy: 'A refined backyard transformation with layered seating, subtle lighting, and crisp hardscape details designed for everyday use and evening entertaining.',
+        images: [
+          'images/Proj3/1.png',
+          'images/Proj3/2.png',
+          'images/Proj3/3.png',
+          'images/Proj3/4.png',
+          'images/Proj3/5.png',
+          'images/Proj3/6.png',
+          'images/Proj3/7.png',
+          'images/Proj3/8.png',
+          'images/Proj3/9.png',
+          'images/Proj3/10.png'
+        ],
+        tags: ['Hardscape', 'Lighting', 'Outdoor living']
+      },
+      {
+        title: 'Project 3',
+        link: 'https://www.rlminc.com/projects/featured-project-5/',
+        copy: 'A front and backyard upgrade that delivers major appeal through balance, texture, and timeless material choices that read beautifully from all around.',
+        images: [
+          'images/Proj5/1.png',
+          'images/Proj5/2.png',
+          'images/Proj5/3.png',
+          'images/Proj5/4.png',
+          'images/Proj5/5.png',
+          'images/Proj5/6.png',
+          'images/Proj5/7.png',
+          'images/Proj5/8.png',
+          'images/Proj5/9.png',
+          'images/Proj5/10.png',
+          'images/Proj5/11.png',
+          'images/Proj5/12.png',
+          'images/Proj5/13.png',
+          'images/Proj5/14.png',
+          'images/Proj5/15.png'
+        ],
+        tags: ['Curb appeal', 'Design build', 'Front & Backyard']
+      }
+    ];
+
+    let projectIndex = 0;
+    let imageIndex = 0;
+
+    const projectTitle = document.getElementById('project-title');
+    const projectCopy = document.getElementById('project-copy');
+    const projectImage = document.getElementById('project-image');
+    const projectOverlayTitle = document.getElementById('project-overlay-title');
+    const projectTags = document.getElementById('project-tags');
+    const projectThumbs = document.getElementById('project-thumbs');
+    const projectTabs = document.querySelectorAll('.project-tab');
+    const projectLink = document.getElementById('project-link');
+
+    function renderProject() {
+      const p = projects[projectIndex];
+
+      projectTitle.textContent = p.title;
+      projectCopy.textContent = p.copy;
+      projectOverlayTitle.textContent = p.title;
+      projectLink.href = p.link;
+
+      projectTags.innerHTML = p.tags.map((tag) => `<span class="tag">${tag}</span>`).join('');
+
+      projectImage.src = p.images[imageIndex];
+      projectImage.alt = `${p.title} image ${imageIndex + 1}`;
+
+      projectThumbs.innerHTML = p.images
+        .map(
+          (img, idx) => `
+            <button
+              class="thumb ${idx === imageIndex ? 'active' : ''}"
+              data-thumb="${idx}"
+              type="button"
+              aria-label="View image ${idx + 1} for ${p.title}"
+            >
+              <img src="${img}" alt="${p.title} thumbnail ${idx + 1}" />
+            </button>
+          `
+        )
+        .join('');
+
+      projectTabs.forEach((tab, idx) => {
+        tab.classList.toggle('active', idx === projectIndex);
+      });
+
+      document.querySelectorAll('.thumb').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          imageIndex = Number(btn.dataset.thumb);
+          renderProject();
+        });
+      });
+    }
+
+    projectTabs.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        projectIndex = Number(btn.dataset.project);
+        imageIndex = 0;
+        renderProject();
+      });
+    });
+
+    renderProject();
+
+    const reviews = [
+      {
+        name: 'Robert M.',
+        quote: 'Joe, Rigo and Victor were awesome. My block work is beautiful, the team came early every day and worked very hard to complete my installation. They made sure every area was cleaned up and neat.'
+      },
+      {
+        name: 'Karen Q.',
+        quote: "Ricci's did a fantastic job from start to finish. They were very responsive and arrived a few days after calling. Kyle created an amazing design and the crew was professional, respectful, and detail-oriented."
+      },
+      {
+        name: 'Sarah P.',
+        quote: 'After years of attempting our lawn maintenance on our own, we decided to give RLM a try. They have been amazing! Our lawn went from looking like the sore spot of the neighborhood to the best lawn on the block!'
+      },
+      {
+        name: 'Bret B.',
+        quote: 'Sod removal, river rock placement with border. Freshen garden border as well. Adolfo and Oswaldo were very nice to work with, professional and great attention to detail. This is the 3rd project RLM has done for us and we will continue using them on future projects.'
+      },
+      {
+        name: 'Katie H.',
+        quote: 'RLM did an amazing job installing a large patio which included working with our new pool/pool company, a wall along our driveway, a pergola and an irrigation system for our new home. Together with their team, they worked really hard all day long in the hotter temperatures to craft a beautiful and highly functional outdoor space.'
+      }
+    ];
+
+    const reviewNav = document.getElementById('review-nav');
+    const reviewQuote = document.getElementById('review-quote');
+    const reviewName = document.getElementById('review-name');
+    let reviewIndex = 0;
+
+    function renderReview() {
+      const r = reviews[reviewIndex];
+      reviewQuote.textContent = r.quote;
+      reviewName.textContent = `— ${r.name}`;
+
+      reviewNav.querySelectorAll('.review-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === reviewIndex);
+        dot.setAttribute('aria-pressed', idx === reviewIndex ? 'true' : 'false');
+      });
+    }
+
+    reviews.forEach((review, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'review-dot' + (idx === 0 ? ' active' : '');
+      btn.textContent = String(idx + 1).padStart(2, '0');
+      btn.setAttribute('aria-label', `Show review ${idx + 1}`);
+      btn.setAttribute('aria-pressed', idx === 0 ? 'true' : 'false');
+
+      btn.addEventListener('click', () => {
+        reviewIndex = idx;
+        renderReview();
+      });
+
+      reviewNav.appendChild(btn);
+    });
+
+    renderReview();
+
+    const countyData = {
+      Lake: ["Crown Point", "Merrillville", "Munster", "Dyer", "Saint John", "Schererville", "Hobart"],
+      Porter: ["Valparaiso", "Ogden Dunes", "Portage", "Dune Acres", "Hebron", "Lowell"],
+      Jasper: ["Rensselaer", "DeMotte", "Remington", "Wheatfield"],
+      LaPorte: ["LaPorte", "Michigan City", "Westville", "Kingsbury", "New Carlisle"],
+      Berrien: ["Benton Harbor", "St. Joseph", "Niles", "Buchanan"]
+    };
+
+    const countyEls = Array.from(document.querySelectorAll('.county'));
+    const selectedName = document.getElementById('selectedName');
+    const cityContent = document.getElementById('cityContent');
+
+    function renderCounty(name) {
+      selectedName.textContent = `${name} County`;
+      const cities = countyData[name] || [];
+      cityContent.innerHTML = `
+        <strong>Cities</strong>
+        <ul class="city-list">
+          ${cities.map(city => `<li>${city}</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    countyEls.forEach(el => {
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `Select ${el.dataset.county} County`);
+
+      el.addEventListener('click', () => {
+        countyEls.forEach(node => node.classList.remove('active'));
+        el.classList.add('active');
+        renderCounty(el.dataset.county);
+      });
+
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    });
+
+    document.querySelector('[data-county="Lake"]').click();
+
+    const rail = document.getElementById('brandRail');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const scrollLeftMobileBtn = document.getElementById('scrollLeftMobile');
+    const scrollRightMobileBtn = document.getElementById('scrollRightMobile');
+
+    const scrollAmount = 360;
+
+    function scrollRail(direction) {
+      if (!rail) return;
+      rail.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+
+    if (scrollLeftBtn) scrollLeftBtn.addEventListener('click', () => scrollRail('left'));
+    if (scrollRightBtn) scrollRightBtn.addEventListener('click', () => scrollRail('right'));
+    if (scrollLeftMobileBtn) scrollLeftMobileBtn.addEventListener('click', () => scrollRail('left'));
+    if (scrollRightMobileBtn) scrollRightMobileBtn.addEventListener('click', () => scrollRail('right'));
+  </script>
+</body>
+</html>
