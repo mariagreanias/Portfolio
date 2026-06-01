@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulseTrack — Side Rail Layout</title>
+  <meta name="description" content="PulseTrack landing page with a different layout design featuring a side rail navigation and modular content sections." />
+
+  <!-- =========================
+       CSS
+       ========================= -->
+  <style>
+    :root {
+      --bg: #0b0f16;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-2: rgba(255, 255, 255, 0.1);
+      --text: #f4f7fb;
+      --muted: #a7b1c7;
+      --line: rgba(255, 255, 255, 0.1);
+      --accent: #63f2bc;
+      --accent-2: #7aa7ff;
+      --accent-3: #ff7f9f;
+      --shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+      --radius: 26px;
+      --max: 1240px;
+      --sidebar: 270px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(99, 242, 188, 0.12), transparent 20%),
+        radial-gradient(circle at 90% 10%, rgba(122, 167, 255, 0.10), transparent 18%),
+        linear-gradient(180deg, #0d121b 0%, #090d14 100%);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input { font: inherit; }
+
+    .page {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 18px auto;
+      display: grid;
+      grid-template-columns: var(--sidebar) 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .sidebar,
+    .content {
+      min-height: calc(100vh - 36px);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 18px;
+      align-self: start;
+      padding: 22px;
+      border-radius: 30px;
+      background: rgba(7, 11, 18, 0.82);
+      backdrop-filter: blur(18px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07111c;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      box-shadow: 0 14px 30px rgba(99, 242, 188, 0.16);
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+    }
+
+    .rail-note {
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+
+    .rail-note strong { display: block; margin-bottom: 6px; }
+    .rail-note p { color: var(--muted); font-size: 0.94rem; }
+
+    .sidebar nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar nav a {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: 0.22s ease;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .rail-actions {
+      margin-top: auto;
+      display: grid;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.24s ease;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #07111c; }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: var(--text); border-color: var(--line); }
+
+    .mobile-topbar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,22,0.84);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mobile-topbar-inner {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mobile-toggle {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .hamburger { width: 24px; height: 18px; position: relative; display: inline-block; }
+    .hamburger span { position: absolute; left: 0; right: 0; height: 2px; background: var(--text); border-radius: 999px; }
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 8px; }
+    .hamburger span:nth-child(3) { bottom: 0; }
+
+    .mobile-menu {
+      display: none;
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto 14px;
+      padding: 14px;
+      border-radius: 22px;
+      background: rgba(7,11,18,0.94);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-menu.open { display: grid; gap: 8px; }
+    .mobile-menu a {
+      padding: 12px 14px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight: 800;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+    }
+
+    .hero,
+    .section-card {
+      border-radius: 30px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      align-items: stretch;
+      min-height: 700px;
+    }
+
+    .hero-copy {
+      padding: 14px 8px 8px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      max-width: 10ch;
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+    }
+    h3 { font-size: 1.18rem; line-height: 1.1; }
+
+    p.lead { max-width: 58ch; color: var(--muted); font-size: 1.05rem; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.76rem;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .metric strong { display: block; font-size: 1rem; }
+    .metric span { color: var(--muted); font-size: 0.92rem; }
+
+    .hero-visual {
+      position: relative;
+      min-height: 100%;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(10,14,21,0.08), rgba(10,14,21,0.72)),
+        url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .panel-float {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(7,11,18,0.76);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .panel-float.top { top: 18px; }
+    .panel-float.mid { top: 160px; }
+    .panel-float.bottom { bottom: 18px; }
+    .panel-float strong { display: block; }
+    .panel-float p { color: rgba(244,247,251,0.72); font-size: 0.94rem; margin-top: 6px; }
+
+    .pulse-bars {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+    .bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: var(--w);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: inherit;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .section-title p { max-width: 58ch; color: var(--muted); }
+
+    .problem {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+    .problem-block,
+    .info-block {
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .problem-block p { color: var(--muted); margin-top: 10px; }
+    .problem-stat {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    .stat-box {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+    }
+    .stat-box strong { display: block; margin-bottom: 4px; }
+    .stat-box span { color: var(--muted); font-size: 0.92rem; }
+
+    .cards-3 { grid-template-columns: repeat(3, 1fr); }
+    .card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(99,242,188,.18), rgba(122,167,255,.18));
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+    }
+    .card p { color: var(--muted); margin-top: 10px; }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .timeline {
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .timeline-step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-step:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
+    .step-num {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #07111c; font-weight: 900;
+    }
+
+    .phone-stage {
+      position: relative;
+      min-height: 600px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+    .phone {
+      position: absolute;
+      width: 240px;
+      height: 520px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, #0a111b, #111b2c);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 24px 55px rgba(0,0,0,0.35);
+      overflow: hidden;
+      transform: rotate(-7deg);
+      animation: drift 4.8s ease-in-out infinite;
+    }
+    .phone.two {
+      transform: rotate(8deg) translateX(150px) translateY(24px);
+      animation-delay: 0.8s;
+    }
+    .screen {
+      position: absolute;
+      inset: 12px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(99,242,188,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    .top-line {
+      height: 34px;
+      background: rgba(255,255,255,0.08);
+    }
+    .ring {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: 20px auto 16px;
+      background: conic-gradient(var(--accent) 0 76%, rgba(255,255,255,0.08) 76% 100%);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 18px #0d1522;
+    }
+    .ring .inner {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: #0d1522;
+    }
+    .ring strong { font-size: 2rem; display: block; }
+    .ring span { color: var(--muted); font-size: 0.9rem; }
+    .tile {
+      margin: 0 16px 12px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .tile .row { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 10px; }
+    .signal {
+      height: 74px;
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(122,167,255,0.10), rgba(99,242,188,0.06)),
+        repeating-linear-gradient(90deg, transparent, transparent 14px, rgba(255,255,255,0.06) 14px, rgba(255,255,255,0.06) 15px);
+      position: relative;
+      overflow: hidden;
+    }
+    .signal::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.45) 48%, transparent 60%);
+      transform: translateX(-120%);
+      animation: sweep 2.8s linear infinite;
+    }
+
+    .why-grid { grid-template-columns: repeat(3, 1fr); }
+    .why-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .why-card p { color: var(--muted); margin-top: 10px; }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .quote-card {
+      padding: 28px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 330px;
+      box-shadow: var(--shadow);
+    }
+    .quote {
+      font-size: clamp(1.22rem, 2.2vw, 1.7rem);
+      line-height: 1.4;
+      letter-spacing: -0.04em;
+      max-width: 24ch;
+    }
+    .stars {
+      color: #95ffd4;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+    }
+    .avatar-row { display: flex; }
+    .avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid rgba(11,15,22,0.92);
+      margin-left: -8px;
+      background-size: cover;
+      background-position: center;
+    }
+    .controls { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    .price-card {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .price-card.featured {
+      border-color: rgba(99,242,188,0.22);
+      background: linear-gradient(180deg, rgba(99,242,188,0.10), rgba(255,255,255,0.05));
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      margin-top: 8px;
+    }
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+    .price-card li::before { content: "✓ "; color: var(--accent); font-weight: 900; }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+    .cta-box,
+    .contact-box {
+      padding: 26px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .cta-box p { color: var(--muted); margin-top: 10px; }
+    .form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .form input {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      padding: 14px 16px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .contact-items {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .contact-item {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--line);
+    }
+    .contact-item span { color: var(--muted); display: block; margin-top: 4px; }
+
+    .footer {
+      padding: 24px 0 34px;
+      color: var(--muted);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(7, 11, 18, 0.95);
+      border: 1px solid var(--line);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+      transition: 0.24s ease;
+      z-index: 200;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @keyframes drift {
+      0%,100% { transform: translateY(0) rotate(-7deg); }
+      50% { transform: translateY(-10px) rotate(-7deg); }
+    }
+    @keyframes sweep {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    @media (max-width: 1060px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .mobile-topbar { display: block; }
+      .hero, .problem, .timeline-grid, .testimonials, .cta-grid { grid-template-columns: 1fr; }
+      .cards-3, .why-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .metrics { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .hero-visual { min-height: 640px; }
+      .section-title { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 760px) {
+      .cards-3, .why-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .hero { padding: 18px; }
+      .content { gap: 18px; }
+      .phone { width: 214px; height: 456px; }
+      .phone.two { transform: rotate(8deg) translateX(118px) translateY(18px); }
+      h1 { max-width: 100%; }
+      .hero-actions { flex-direction: column; }
+      .panel-float.mid { top: 140px; }
+      .problem-block, .info-block, .timeline, .quote-card, .cta-box, .contact-box { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- =========================
+       HTML
+       ========================= -->
+  <header class="mobile-topbar">
+    <div class="mobile-topbar-inner">
+      <a class="brand" href="#home" aria-label="PulseTrack home">
+        <div class="logo">↯</div>
+        <span>
+          PulseTrack
+          <small>Real-time fitness data</small>
+        </span>
+      </a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span class="hamburger"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <div class="page">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#home">
+        <div class="logo">↯</div>
+        <span>
+          PulseTrack
+          <small>Real-time fitness data</small>
+        </span>
+      </a>
+
+      <div class="rail-note">
+        <strong>Train with data.</strong>
+        <p>Minimal interface. High feedback. Built for athletes who care about the details.</p>
+      </div>
+
+      <nav>
+        <a class="active" href="#home">Overview</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="rail-actions">
+        <a class="btn btn-primary" href="#contact">Join the Waitlist</a>
+        <a class="btn btn-secondary" href="#features">Explore Features</a>
+      </div>
+    </aside>
+
+    <main class="content" id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">Train Smarter with Real-Time Heart Data</span>
+          <h1>Performance tracking, restructured.</h1>
+          <p class="lead">A different layout for PulseTrack: side rail navigation, modular content panels, and a more guided reading flow designed to feel fast and intentional.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Join the Waitlist</a>
+            <a class="btn btn-secondary" href="#how-it-works">How It Works</a>
+          </div>
+          <div class="metrics">
+            <div class="metric"><strong>Live zones</strong><span>Instant heart-rate feedback</span></div>
+            <div class="metric"><strong>Smart alerts</strong><span>Stay in the right range</span></div>
+            <div class="metric"><strong>Insights</strong><span>Turn training into progress</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="panel-float top">
+            <strong>Session locked</strong>
+            <p>Heart data is updating in real time during the workout.</p>
+          </div>
+          <div class="panel-float mid">
+            <strong>Current status</strong>
+            <div class="pulse-bars">
+              <div class="bar" style="--w:78%"></div>
+              <div class="bar" style="--w:56%"></div>
+              <div class="bar" style="--w:84%"></div>
+            </div>
+          </div>
+          <div class="panel-float bottom">
+            <strong>Recovery cue</strong>
+            <p>Reduce pace for 90 seconds, then return to target effort.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-card section">
+        <div class="problem">
+          <div class="problem-block">
+            <span class="eyebrow">Problem</span>
+            <h2 style="margin-top:10px">Most fitness apps track activity. Few optimize performance.</h2>
+            <p>PulseTrack is shaped around training quality, giving athletes live feedback they can actually act on while the session is happening.</p>
+          </div>
+          <div class="problem-stat">
+            <div class="stat-box"><strong>Better pacing</strong><span>Stay inside the intended effort zone.</span></div>
+            <div class="stat-box"><strong>Less guessing</strong><span>Know what your body is doing in real time.</span></div>
+            <div class="stat-box"><strong>Cleaner review</strong><span>Learn from every workout more quickly.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">Features</span>
+            <h2 style="margin-top:10px">Three core tools, each with its own block.</h2>
+          </div>
+          <p>Cards are arranged in a staggered section to create a more modular, editorial layout.</p>
+        </div>
+        <div class="grid cards-3">
+          <article class="card">
+            <div class="icon">♥</div>
+            <h3>Real-time heart zones</h3>
+            <p>See exactly where your effort lands so every block of training stays intentional.</p>
+          </article>
+          <article class="card">
+            <div class="icon">⚡</div>
+            <h3>Smart alerts</h3>
+            <p>Receive focused prompts when your intensity drifts outside the target range.</p>
+          </article>
+          <article class="card">
+            <div class="icon">↗</div>
+            <h3>Performance insights</h3>
+            <p>Translate the session into simple next-step guidance for future workouts.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">How It Works</span>
+            <h2 style="margin-top:10px">A left-to-right story flow.</h2>
+          </div>
+          <p>This section uses a timeline on the left and a live-looking phone stack on the right for a very different composition.</p>
+        </div>
+        <div class="timeline-grid">
+          <div class="timeline">
+            <div class="timeline-step">
+              <div class="step-num">1</div>
+              <div>
+                <h3>Connect</h3>
+                <p class="muted">Pair your heart-rate device and start training in seconds.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">2</div>
+              <div>
+                <h3>Monitor</h3>
+                <p class="muted">Watch live zones and receive coaching cues during the workout.</p>
+              </div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-num">3</div>
+              <div>
+                <h3>Improve</h3>
+                <p class="muted">Use clean session data to make the next workout better.</p>
+              </div>
+            </div>
+          </div>
+          <div class="info-block phone-stage">
+            <div class="phone">
+              <div class="screen">
+                <div class="top-line"></div>
+                <div class="ring"><div class="inner"><strong>142</strong><span>bpm</span></div></div>
+                <div class="tile">
+                  <div class="row"><strong>Zone 3</strong><span class="muted">Locked in</span></div>
+                  <div class="signal"></div>
+                </div>
+                <div class="tile">
+                  <div class="row"><strong>Efficiency</strong><span>+12%</span></div>
+                  <div class="bar" style="--w: 82%; height: 12px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="phone two">
+              <div class="screen">
+                <div class="top-line"></div>
+                <div class="ring"><div class="inner"><strong>86</strong><span>recovery</span></div></div>
+                <div class="tile">
+                  <div class="row"><strong>Next cue</strong><span class="muted">Hydrate</span></div>
+                  <p class="muted">Prepare for the next block in 2 minutes.</p>
+                </div>
+                <div class="tile">
+                  <div class="row"><strong>Load</strong><span>Moderate</span></div>
+                  <div class="bar" style="--w: 66%; height: 12px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">Why Choose PulseTrack</span>
+            <h2 style="margin-top:10px">Designed for disciplined athletes.</h2>
+          </div>
+          <p>Three benefits arranged as separate panels to support a more modular page structure.</p>
+        </div>
+        <div class="grid why-grid">
+          <article class="why-card">
+            <h3>Data-driven training</h3>
+            <p>Every view is centered on the metrics that influence performance.</p>
+          </article>
+          <article class="why-card">
+            <h3>Built for serious athletes</h3>
+            <p>Made to feel credible for endurance, conditioning, and repeat training cycles.</p>
+          </article>
+          <article class="why-card">
+            <h3>Simple interface</h3>
+            <p>Clear structure keeps the experience efficient and easy to trust.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="testimonials">
+        <div class="section-title">
+          <div>
+            <span class="eyebrow">Testimonials</span>
+            <h2 style="margin-top:10px">Beta feedback, shown in a split layout.</h2>
+          </div>
+          <p>One testimonial block on the left and supplemental information on the right creates a stronger layout break.</p>
+        </div>
+        <div class="testimonials">
+          <article class="quote-card" id="testimonialCard">
+            <div>
+              <div class="stars" id="stars">★★★★★</div>
+              <p class="quote" id="quote">"It feels like a real training tool instead of just another app. The live cues made the workout much easier to control."</p>
+            </div>
+            <div>
+              <div class="review-meta">
+                <div>
+                  <strong id="name">Mia R.</strong><br />
+                  <small class="muted" id="role">Beta runner</small>
+                </div>
+                <div class="avatar-row">
+                  <div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=12')"></div>
+                  <div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=41')"></div>
+                  <div class="avatar" style="background-image:url('https://i.pravatar.cc/100?img=25')"></div>
+                </div>
+              </div>
+              <div class="controls">
+                <button class="btn btn-secondary" id="prevTestimonial">Prev</button>
+                <button class="btn btn-secondary" id="nextTestimonial">Next</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="info-block">
+            <span class="eyebrow">Pricing</span>
+            <h3 style="margin-top:12px">Placeholder tiers.</h3>
+            <p class="muted" style="margin-top:10px">A compact pricing panel keeps the layout balanced without dominating the page.</p>
+            <div class="grid pricing-grid" id="pricing" style="margin-top:18px;">
+              <div class="price-card">
+                <strong>Starter</strong>
+                <div class="price">$0</div>
+                <p class="muted">Waitlist access</p>
+                <ul>
+                  <li>Launch updates</li>
+                  <li>Beta priority</li>
+                  <li>Early invite</li>
+                </ul>
+              </div>
+              <div class="price-card featured">
+                <strong>Pro</strong>
+                <div class="price">Soon</div>
+                <p class="muted">For athletes</p>
+                <ul>
+                  <li>Real-time zones</li>
+                  <li>Smart alerts</li>
+                  <li>Insights</li>
+                </ul>
+              </div>
+              <div class="price-card">
+                <strong>Team</strong>
+                <div class="price">Soon</div>
+                <p class="muted">For coaches</p>
+                <ul>
+                  <li>Shared oversight</li>
+                  <li>Load tracking</li>
+                  <li>Team analytics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="cta-grid">
+          <div class="cta-box">
+            <span class="eyebrow">CTA</span>
+            <h2 style="margin-top:10px">Be first to experience PulseTrack.</h2>
+            <p>Join the waitlist to get launch updates and early access before the public release.</p>
+            <form class="form" onsubmit="event.preventDefault(); showToast('You are on the waitlist.');">
+              <input type="email" required placeholder="Email address" />
+              <input type="text" placeholder="Training focus (run, ride, lift, etc.)" />
+              <button class="btn btn-primary" type="submit">Join the Waitlist</button>
+            </form>
+          </div>
+
+          <div class="contact-box">
+            <span class="eyebrow">Contact</span>
+            <h3 style="margin-top:10px">Partnerships, coaching, or launch questions.</h3>
+            <div class="contact-items">
+              <div class="contact-item"><strong>Email</strong><span>hello@pulsetrack.app</span></div>
+              <div class="contact-item"><strong>Partnerships</strong><span>partners@pulsetrack.app</span></div>
+              <div class="contact-item"><strong>Support</strong><span>support@pulsetrack.app</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-row">
+          <div class="brand">
+            <div class="logo">↯</div>
+            <span>
+              PulseTrack
+              <small>Real-time fitness data</small>
+            </span>
+          </div>
+          <div>Overview · Features · How It Works · Testimonials · Pricing · Contact</div>
+          <div>© <span id="year"></span> PulseTrack</div>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast">Added to waitlist</div>
+
+  <!-- =========================
+       JavaScript
+       ========================= -->
+  <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileToggle?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    const testimonials = [
+      {
+        quote: '"It feels like a real training tool instead of just another app. The live cues made the workout much easier to control."',
+        name: 'Mia R.',
+        role: 'Beta runner',
+        stars: '★★★★★'
+      },
+      {
+        quote: '"The layout made the data easy to read. I could focus on pacing instead of navigating a cluttered interface."',
+        name: 'Evan T.',
+        role: 'Beta cyclist',
+        stars: '★★★★★'
+      },
+      {
+        quote: '"The post-session insights are simple but powerful. It gave me a clear direction for the next session."',
+        name: 'Tara S.',
+        role: 'Beta triathlete',
+        stars: '★★★★★'
+      }
+    ];
+
+    let current = 0;
+    const quoteEl = document.getElementById('quote');
+    const nameEl = document.getElementById('name');
+    const roleEl = document.getElementById('role');
+    const starsEl = document.getElementById('stars');
+
+    function renderTestimonial(index) {
+      const t = testimonials[index];
+      quoteEl.textContent = t.quote;
+      nameEl.textContent = t.name;
+      roleEl.textContent = t.role;
+      starsEl.textContent = t.stars;
+    }
+
+    document.getElementById('prevTestimonial').addEventListener('click', () => {
+      current = (current - 1 + testimonials.length) % testimonials.length;
+      renderTestimonial(current);
+    });
+
+    document.getElementById('nextTestimonial').addEventListener('click', () => {
+      current = (current + 1) % testimonials.length;
+      renderTestimonial(current);
+    });
+
+    setInterval(() => {
+      current = (current + 1) % testimonials.length;
+      renderTestimonial(current);
+    }, 7000);
+  </script>
+</body>
+</html>
