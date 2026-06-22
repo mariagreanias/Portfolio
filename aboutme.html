@@ -1,333 +1,542 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About — Maria Greanias</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Maria Greanias</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cream: #f5f0e8;
-  --ink: #000000;
-  --rust: #21a5d5;
-}
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink: #111111;
+      --rust: #21a5d5;
+      --card: #ffffff;
+      --muted: rgba(17, 17, 17, 0.7);
+      --line: rgba(17, 17, 17, 0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
 
-body{
-  background:var(--cream);
-  font-family:'Inter', sans-serif;
-  color:var(--ink);
-  cursor:none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* HEADSHOT */
-.headshot-wrapper{
-  margin-bottom:40px;
-  text-align:center;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.headshot{
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  object-fit:cover;
-  display:block;
-  margin:0 auto 20px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.12);
-}
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: "Inter", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-.headshot-caption{
-  font-size:12px;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:var(--rust);
-}
+    a {
+      color: inherit;
+    }
 
-/* CUSTOM CURSOR */
-.cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--rust);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-}
+    .page {
+      min-height: 100vh;
+    }
 
-.cursor-ring {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--rust);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
-}
+    .main-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 48px;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
 
-/* NAV */
-.main-nav{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:24px 48px;
-  background:var(--cream);
-  border-bottom:1px solid rgba(0,0,0,0.06);
-  z-index:100;
-}
+    .nav-logo {
+      text-decoration: none;
+      font-family: "Playfair Display", serif;
+      font-weight: 900;
+      font-size: 30px;
+      letter-spacing: 0.02em;
+    }
 
-.nav-logo{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:900;
-  text-decoration:none;
-  color:var(--ink);
-}
+    .nav-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
 
-.nav-right{
-  display:flex;
-  gap:36px;
-}
+    .nav-right a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
 
-.nav-right a{
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  text-decoration:none;
-  color:var(--ink);
-}
+    .nav-right a:hover {
+      color: var(--rust);
+    }
 
-.nav-right a:hover{
-  color:var(--rust);
-}
+    .hero {
+      padding: 90px 48px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
 
-/* HERO */
-.about-hero{
-  padding:100px 48px 60px;
-  text-align:center;
-}
+    .hero-copy h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(54px, 7vw, 96px);
+      line-height: 0.95;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
 
-.about-hero h1{
-  font-family:'Playfair Display', serif;
-  font-size:clamp(48px,6vw,90px);
-  font-weight:900;
-}
+    .hero-copy h1 em {
+      color: var(--rust);
+      font-style: italic;
+    }
 
-.about-hero em{
-  color:var(--rust);
-  font-style:italic;
-}
+    .hero-copy p {
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
 
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
 
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+      border: 1px solid var(--ink);
+      background: transparent;
+    }
 
-/* CONTENT SECTION */
-.about-section{
-  padding:40px 48px 100px;
-  max-width:1000px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:80px;
-}
+    .button:hover {
+      transform: translateY(-2px);
+    }
 
-.section-title{
-  font-family:'Playfair Display', serif;
-  font-size:36px;
-  font-weight:900;
-  margin-bottom:24px;
-}
+    .button.primary {
+      background: var(--ink);
+      color: white;
+    }
 
-.about-hero p,
-.section-text{
-  font-size:16px;
-  line-height:1.9;
-  margin-bottom:24px;
-}
+    .button.primary:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+    }
 
-/* SKILLS */
-.skills-list{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px 40px;
-  font-size:12px;
-  letter-spacing:.05em;
-}
+    .button.secondary:hover {
+      background: rgba(17,17,17,0.05);
+    }
 
-/* CONTACT */
-.contact-box{
-  margin-top:50px;
-  font-size:18px;
-  line-height:2.2;
-  font-weight: 500;
-}
+    .hero-card {
+      background: var(--card);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
 
-.contact-box a{
-  color:var(--rust);
-  text-decoration:none;
-}
+    .headshot-wrapper {
+      text-align: center;
+    }
 
-/* WHY WORK WITH ME */
-.highlight-box{
-  background:white;
-  padding:40px;
-  border-radius:8px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.08);
-}
+    .headshot {
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      display: block;
+      margin: 0 auto 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .about-section{
-    grid-template-columns:1fr;
-    gap:60px;
-  }
-}
+    .headshot-caption {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 16px;
+    }
 
-@media(max-width:768px){
-  .about-hero{padding:80px 24px 40px;}
-  .about-section{padding:20px 24px 80px;}
-  .main-nav{padding:20px 24px;}
-}
-</style>
+    .profile-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(33, 165, 213, 0.12);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 48px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .panel {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 34px;
+      line-height: 1.05;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .section-text {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .subsection {
+      margin-top: 34px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .skill {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(17,17,17,0.03);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .category {
+      margin-bottom: 24px;
+    }
+
+    .category-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 12px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(17,17,17,0.05);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .contact-box a {
+      color: var(--rust);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    .highlight-box {
+      background: linear-gradient(180deg, rgba(33,165,213,0.08), rgba(255,255,255,1));
+      border: 1px solid rgba(33,165,213,0.14);
+    }
+
+    .why-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .why-item {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .why-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .footer-cta {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 70px;
+    }
+
+    .footer-cta .panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-cta h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .footer-cta p {
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 700px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-nav {
+        padding: 18px 20px;
+      }
+
+      .hero,
+      .content,
+      .footer-cta {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .hero {
+        gap: 28px;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-right {
+        gap: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="page">
+    <nav class="main-nav">
+      <a href="index.html" class="nav-logo">MG</a>
+      <div class="nav-right">
+        <a href="webdesign.html">Web Design</a>
+        <a href="graphicdesign.html">Graphic Design</a>
+        <a href="resume.html">Resume</a>
+        <a href="aboutme.html">About</a>
+      </div>
+    </nav>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>About <em>Me.</em></h1>
+        <p>
+          I’m Maria Greanias — a designer focused on building thoughtful digital experiences
+          that balance usability, clarity, and expressive visual systems.
+        </p>
 
-<nav class="main-nav">
-  <a href="index.html" class="nav-logo">MG</a>
-  <div class="nav-right">
-    <a href="webdesign.html">Web Design</a>
-    <a href="graphicdesign.html">Graphic Design</a>
-    <a href="resume.html">Resume</a>
-    <a href="aboutme.html">About</a>
+        <div class="hero-actions">
+          <a class="button primary" href="resume.html">View Resume</a>
+          <a class="button secondary" href="mailto:mariagreanias@gmail.com">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="headshot-wrapper">
+          <img src="project images and recordings/Profile.jpg" alt="Maria Greanias Headshot" class="headshot">
+          <div class="headshot-caption">Maria Greanias</div>
+
+          <div class="profile-pills">
+            <span class="pill">UI / UX Design</span>
+            <span class="pill">Web Design</span>
+            <span class="pill">Visual Systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="panel">
+        <div class="section-title">My Approach</div>
+        <div class="section-text">
+          I approach design as both a creative and analytical discipline. Every interface I build is
+          rooted in structure, intentional spacing, and user-centered thinking.
+        </div>
+        <div class="section-text">
+          I enjoy solving complex problems through simple systems — whether that’s building responsive
+          web applications, refining interaction details, or creating cohesive visual identities.
+        </div>
+
+        <div class="subsection">
+          <div class="section-title" style="font-size: 28px;">Skills</div>
+
+          <div class="category">
+            <div class="category-label">Design</div>
+            <div class="tag-row">
+              <span class="tag">UI / UX Design</span>
+              <span class="tag">Wireframing</span>
+              <span class="tag">Prototyping</span>
+              <span class="tag">Typography</span>
+              <span class="tag">Visual Systems</span>
+              <span class="tag">Interaction Design</span>
+            </div>
+          </div>
+
+          <div class="category">
+            <div class="category-label">Development</div>
+            <div class="tag-row">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Responsive Design</span>
+            </div>
+          </div>
+
+          <div class="category">
+            <div class="category-label">Tools</div>
+            <div class="tag-row">
+              <span class="tag">Figma</span>
+              <span class="tag">Adobe Suite</span>
+              <span class="tag">AI Use and Management</span>
+            </div>
+          </div>
+
+          <div class="category">
+            <div class="category-label">Strengths</div>
+            <div class="tag-row">
+              <span class="tag">Multitasking</span>
+              <span class="tag">Organization</span>
+              <span class="tag">Adaptability</span>
+              <span class="tag">Initiative</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel highlight-box">
+        <div class="section-title">Why Work With Me?</div>
+        <div class="section-text">
+          I bring a balance of creativity and technical execution. I don’t just design how something
+          looks, I think deeply about how it functions and how users experience it.
+        </div>
+
+        <div class="why-list">
+          <div class="why-item">
+            <strong>Creative + Technical</strong>
+            I combine visual design with practical implementation to create work that is both polished and functional.
+          </div>
+
+          <div class="why-item">
+            <strong>Detail Oriented</strong>
+            I stay organized, communicate clearly, and pay close attention to layout, spacing, and consistency.
+          </div>
+
+          <div class="why-item">
+            <strong>AI-Enhanced Workflow</strong>
+            After completing a course focused on the application of Artificial Intelligence in digital design, I developed a strong understanding of how AI can support research, accelerate ideation, streamline workflows, and expand creative exploration while keeping human direction at the center.
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="section-title" style="font-size: 28px;">Contact</div>
+          <div class="section-text contact-box">
+            Email: <a href="mailto:mariagreanias@gmail.com">mariagreanias@gmail.com</a><br>
+            LinkedIn: <a href="https://www.linkedin.com/in/maria-greanias-01b126246" target="_blank" rel="noopener noreferrer">linkedin.com/in/maria-greanias-01b126246</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-cta">
+      <div class="panel">
+        <div>
+          <h2>Let’s create something meaningful together.</h2>
+          <p>
+            I’m always interested in thoughtful projects where design, usability, and strong visual identity come together.
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a href="mailto:mariagreanias@gmail.com">mariagreanias@gmail.com</a>
+          <a href="https://www.linkedin.com/in/maria-greanias-01b126246" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+        </div>
+      </div>
+    </section>
   </div>
-</nav>
-
-<section class="about-hero">
-  <h1>About <em>Me.</em></h1>
-  <p>
-    I’m Maria Greanias — a designer focused on building thoughtful digital experiences 
-    that balance usability, clarity, and expressive visual systems.
-  </p>
-</section>
-
-<section class="about-section">
-
-  <div>
-    <div class="section-title">My Approach</div>
-    <div class="section-text">
-      I approach design as both a creative and analytical discipline. 
-      Every interface I build is rooted in structure, intentional spacing, 
-      and user-centered thinking.
-    </div>
-    <div class="section-text">
-      I enjoy solving complex problems through simple systems — whether 
-      that’s building responsive web applications, refining interaction 
-      details, or creating cohesive visual identities.
-    </div>
-
-    <div class="section-title">Skills</div>
-    <div class="skills-list">
-      <div>HTML5</div>
-      <div>CSS3</div>
-      <div>Responsive Design</div>
-      <div>UI / UX Design</div>
-      <div>JavaScript</div>
-      <div>Visual Systems</div>
-      <div>Wireframing</div>
-      <div>Typography</div>
-      <div>Prototyping</div>
-      <div>Interaction Design</div>
-      <div>Figma</div>
-      <div>Adobe Suite</div>
-      <div>Multitasking</div>
-      <div>AI Use and management</div>
-    </div>
-
-    <div class="contact-box">
-      <div class="section-title">Contact</div>
-      <div>Email: <a href="mailto:mariagreanias@gmail.com">mariagreanias@gmail.com</a></div>
-      <div>LinkedIn: <a href="www.linkedin.com/in/maria-greanias-01b126246">www.linkedin.com/in/maria-greanias-01b126246</a></div>
-    </div>
-  </div>
-
-  <div>
-    <div class="headshot-wrapper">
-        <img src="project images and recordings/Profile.jpg" alt="Maria Greanias Headshot" class="headshot">
-        <div class="headshot-caption">Maria Greanias</div>
-      </div>
-    <div class="highlight-box">
-      <div class="section-title">Why Work With Me?</div>
-      <div class="section-text">
-        I bring a balance of creativity and technical execution. 
-        I don’t just design how something looks, I think deeply 
-        about how it functions and how users experience it.
-      </div>
-      <div class="section-text">
-        I am detail oriented, highly organized, and comfortable 
-        collaborating in fast-paced environments. I learn quickly, 
-        adapt easily, and take initiative on projects.
-      </div>
-      
-      <div class="section-text">
-        After completing a course focused on the application of Artificial Intelligence in digital design, I developed a strong understanding of how AI can meaningfully enhance the creative process. I approach AI not as a replacement for creativity, but as a strategic design tool, one that supports research, accelerates ideation, streamlines workflows, and unlocks new possibilities for exploration, all while maintaining intentional human direction and critical thinking.
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<script>
-const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-
-document.addEventListener('mousemove', e => {
-  mx = e.clientX;
-  my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
-
-function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  cursorRing.style.left = rx + 'px';
-  cursorRing.style.top = ry + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-document.querySelectorAll('a').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '20px';
-    cursor.style.height = '20px';
-    cursorRing.style.width = '60px';
-    cursorRing.style.height = '60px';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '12px';
-    cursor.style.height = '12px';
-    cursorRing.style.width = '40px';
-    cursorRing.style.height = '40px';
-  });
-});
-</script>
-
 </body>
 </html>

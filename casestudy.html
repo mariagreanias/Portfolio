@@ -1,392 +1,717 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardinal Color Group Case Study</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study — Cardinal Color Group</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink: #0b0b0b;
+      --rust: #21a5d5;
+      --gold: #d4a843;
+      --line: rgba(0, 0, 0, 0.08);
+      --card: #fffaf2;
+    }
 
-<style>
-:root {
-  --cream:#f5f0e8;
-  --ink:#000000;
-  --rust:#21a5d5;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body{
-  background:var(--cream);
-  font-family:'DM Mono', monospace;
-  color:var(--ink);
-}
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-.main-nav{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:24px 48px;
-  background:var(--cream);
-  border-bottom:1px solid rgba(0,0,0,0.06);
-  z-index:100;
-}
+    a {
+      color: inherit;
+    }
 
-.nav-logo{
-  font-family:'Playfair Display', serif;
-  font-size:28px;
-  font-weight:900;
-  text-decoration:none;
-  color:var(--ink);
-}
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
 
-.nav-right{
-  display:flex;
-  gap:36px;
-}
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
 
-.nav-right a{
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  text-decoration:none;
-  color:var(--ink);
-}
+    .topbar {
+      background: var(--ink);
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      padding: 10px 24px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
-.nav-right a:hover{color:var(--rust);}
+    .topbar span {
+      display: inline-block;
+      padding-right: 28px;
+      opacity: 0.9;
+    }
 
-.work-hero{
-  padding:80px 48px 40px;
-  text-align:center;
-}
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
 
-.work-hero h1{
-  font-family:'Playfair Display', serif;
-  font-size:clamp(48px,6vw,90px);
-  font-weight:900;
-  line-height:.95;
-}
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-.work-hero em{
-  color:var(--rust);
-}
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 28px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
 
-.work-hero p{
-  margin-top:24px;
-  max-width:700px;
-  margin-inline:auto;
-}
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:0 48px;
-}
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
 
-section{
-  padding:100px 0;
-}
+    .nav-links a:hover {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.55);
+    }
 
-h2{
-  font-family:'Playfair Display', serif;
-  font-size:42px;
-  margin-bottom:24px;
-}
+    .hero {
+      padding: 44px 28px 18px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: stretch;
+    }
 
-p{
-  font-size:13px;
-  line-height:1.9;
-  margin-bottom:16px;
-}
+    .hero-copy {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.2));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+    }
 
-.two-col{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
-}
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 14px;
+    }
 
-img, video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      max-width: 10ch;
+    }
 
-.image-wrap video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+    .hero p {
+      margin-top: 18px;
+      max-width: 44ch;
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(11, 11, 11, 0.8);
+    }
 
-.image-wrap a{
-  display:block;
-  width:100%;
-  height:100%;
-}
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
 
-.before-after{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  margin-top:60px;
-}
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--line);
+      background: var(--card);
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
 
-.before-after .image-wrap{
-  aspect-ratio:16/10;
-  overflow:hidden;
-}
+    .button:hover {
+      transform: translateY(-1px);
+    }
 
-.alt{
-  background:rgba(0,0,0,0.03);
-}
+    .button.primary {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
 
-.center{
-  text-align:center;
-}
+    .button.primary:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+    }
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:40px;
-  margin-top:40px;
-}
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
 
-.stat h3{
-  font-family:'Playfair Display', serif;
-  font-size:36px;
-}
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
 
-footer{
-  background:var(--ink);
-  color:var(--cream);
-  text-align:center;
-  padding:60px;
-}
+    .visual-tile {
+      position: relative;
+      min-height: 220px;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
 
-@media(max-width:768px){
-  .two-col{grid-template-columns:1fr;}
-  .container{padding:0 24px;}
-  .main-nav{padding:20px 24px;}
-}
+    .visual-tile img,
+    .visual-tile video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
 
+    .overlay-tag {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
 
+    .chips {
+      padding: 10px 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-/* LIGHTBOX */
-.lightbox{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
+    .chip {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.42);
+    }
 
-.lightbox video{
-  max-width:90vw;
-  max-height:90vh;
-}
+    .section {
+      padding: 24px 28px 56px;
+    }
 
-.lightbox.active{
-  display:flex;
-}
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
 
-.lightbox-close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  color:white;
-  font-size:24px;
-  cursor:pointer;
-}
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1;
+    }
 
-</style>
+    .section-head p {
+      max-width: 48ch;
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.75);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.projects {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .card .media {
+      background: var(--card);
+      padding: 18px;
+      min-height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card .media img,
+    .card .media video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .card .body {
+      padding: 18px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .kicker {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      line-height: 1.05;
+      font-weight: 900;
+    }
+
+    .sub {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(11, 11, 11, 0.58);
+    }
+
+    .mini {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.78);
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .row img {
+      border-radius: 16px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat b {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .panel p,
+    .panel li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.78);
+    }
+
+    .panel ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(33, 165, 213, 0.12);
+      color: #0f6f8f;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 8px 8px 0;
+    }
+
+    .footer {
+      padding: 36px 28px 60px;
+      color: rgba(11, 11, 11, 0.68);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .case-hero {
+      padding: 24px 28px 18px;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .before-after .card .media {
+      min-height: 320px;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+
+    @media (max-width: 1100px) {
+      .grid.projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stat-grid,
+      .results {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero,
+      .case-grid,
+      .before-after {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding: 16px 18px;
+      }
+
+      .hero,
+      .section,
+      .chips,
+      .footer,
+      .case-hero {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero-copy {
+        padding: 24px;
+        min-height: auto;
+      }
+
+      .grid.projects,
+      .grid.two,
+      .split,
+      .hero-visual,
+      .stat-grid,
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .quote {
+        font-size: 24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="page">
+    <div class="topbar">
+      <span>Case study</span>
+      <span>Website redesign</span>
+      <span>Strategy</span>
+      <span>Results</span>
+      <span>Case study</span>
+    </div>
 
-<nav class="main-nav">
-  <a href="index.html" class="nav-logo">MG</a>
-  <div class="nav-right">
-    <a href="webdesign.html">Web Design</a>
-    <a href="graphicdesign.html">Graphic Design</a>
-    <a href="resume.html">Resume</a>
-    <a href="aboutme.html">About</a>
-  </div>
-</nav>
-
-<section class="work-hero">
-  <h1>Cardinal <em>Color Group.</em></h1>
-  <p>
-  Reimagining a legacy printing company’s digital presence into a modern, conversion-focused marketing platform. The new experience prioritizes clarity, positions the brand as a strategic partner, and creates a seamless path from discovery to inquiry.
-  </p>
-</section>
-
-<section>
-<div class="container two-col">
-
-<div>
-<h2>Project Overview</h2>
-<p>
-Cardinal Color Group is a long-standing commercial printing and marketing communications company with a broad range of services, including digital printing, packaging, direct mail, and fulfillment. Their capabilities span both traditional production and data-driven marketing solutions, making them more than just a print vendor.
-</p>
-<p>
-However, their previous website did not reflect this depth. The experience felt dated, with limited hierarchy, unclear messaging, and little distinction between services. Visitors were often left unsure of what Cardinal truly specialized in or how to engage with them.
-</p>
-<p>
-This redesign aimed to reposition the company as a modern marketing partner. The goal was not only to improve aesthetics, but to create a structured, strategic experience that communicates expertise, builds trust, and drives measurable business outcomes.
-</p>
-</div>
-
-<div>
-<img src="project images and recordings/INTERNSHIP.png" alt="printing">
-</div>
-
-</div>
-</section>
-
-<section class="alt">
-<div class="container">
-
-<h2>The Problem</h2>
-<p>
-The original website functioned primarily as a static brochure, lacking the strategic elements needed to convert visitors into leads. Key services were buried or poorly explained, and there was no clear narrative guiding users through the company’s offerings.
-</p>
-<p>
-Navigation was inconsistent, making it difficult for users to find relevant information quickly. Messaging was generic and failed to communicate Cardinal’s differentiators, particularly their ability to integrate print with data-driven marketing.
-</p>
-<p>
-As a result, the site underperformed as a business tool—users visited but did not engage, and opportunities for lead generation were frequently lost due to unclear calls-to-action and weak information architecture.
-</p>
-
-</div>
-</section>
-
-<section>
-<div class="container center">
-
-<h2>Website Transformation</h2>
-<p>
-The redesign introduced a clear content hierarchy and simplified navigation system, allowing users to quickly understand Cardinal’s services and value. Each section was intentionally structured to guide users from awareness to action.
-</p>
-<p>
-Service pages were reworked to highlight benefits rather than just features, using concise messaging and supporting visuals. Strategic calls-to-action were placed throughout the experience to encourage inquiries without disrupting flow.
-</p>
-<p>
-The result is a cohesive, intuitive platform that improves usability while reinforcing credibility at every touchpoint.
-</p>
-
-<!-- BEFORE / AFTER IMAGES -->
-<div class="before-after" style="text-align:left;">
-  <div>
-    <div class="image-wrap">
-      <div onclick="openLightbox()" style="cursor:pointer;">
-        <video src="project images and recordings/CardinalBEFORE.mp4" autoplay muted loop playsinline></video>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">MG</a>
+        <nav class="nav-links">
+          <a href="webdesign.html">Web Design</a>
+          <a href="graphicdesign.html">Graphic Design</a>
+          <a href="casestudy.html">Case Study</a>
+          <a href="aboutme.html">About</a>
+        </nav>
       </div>
-    </div>
-    <p style="margin-top:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;">Before — cluttered layout, unclear hierarchy</p>
+    </header>
+
+    <section class="hero case-hero">
+      <div class="hero-copy">
+        <div>
+          <div class="eyebrow">Featured case study</div>
+          <h1>Cardinal Color Group</h1>
+          <p>
+            Website redesign for a print and marketing company, rebuilt with stronger hierarchy and clearer visuals.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://www.cardinalcolorgroup.com/" target="_blank" rel="noopener noreferrer">View live site</a>
+            <a class="button" href="#results">Jump to results</a>
+          </div>
+        </div>
+        <div class="hero-right-note">A visual story with short captions.</div>
+      </div>
+
+      <div class="hero-visual case-grid">
+        <div class="visual-tile">
+          <img src="project images and recordings/INTERNSHIP.png" alt="Cardinal redesign mockup">
+          <div class="overlay-tag">After</div>
+        </div>
+        <div class="stack">
+          <div class="visual-tile">
+            <video src="project images and recordings/CardinalBEFORE.mp4" autoplay muted loop playsinline></video>
+            <div class="overlay-tag">Before</div>
+          </div>
+          <div class="visual-tile">
+            <img src="project images and recordings/INTERNSHIP.png" alt="Website screenshot">
+            <div class="overlay-tag">Redesign system</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Project snapshot</h2>
+        <p>Quick facts replace long intro paragraphs.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><b>Role</b><span>UI / UX Design</span></div>
+        <div class="stat"><b>Time</b><span>Summer 2025</span></div>
+        <div class="stat"><b>Tools</b><span>Figma, HTML, CSS</span></div>
+        <div class="stat"><b>Goal</b><span>Modernize the site</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Problem / solution</h2>
+        <p>Short, direct, and easy to scan.</p>
+      </div>
+      <div class="split">
+        <div class="panel">
+          <h3>Problem</h3>
+          <p>The original site felt dated and hard to navigate, with weak hierarchy and too much clutter.</p>
+        </div>
+        <div class="panel">
+          <h3>Solution</h3>
+          <p>The redesign simplifies structure, emphasizes services, and creates clearer calls to action.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Visual transformation</h2>
+        <p>Before and after shown as large visuals instead of extra paragraphs.</p>
+      </div>
+      <div class="before-after">
+        <article class="card">
+          <div class="media">
+            <video src="project images and recordings/CardinalBEFORE.mp4" autoplay muted loop playsinline></video>
+          </div>
+          <div class="body">
+            <div class="kicker">Before</div>
+            <div class="title">Old layout</div>
+            <div class="sub">Cluttered, unclear</div>
+          </div>
+        </article>
+
+        <article class="card">
+          <a href="https://www.cardinalcolorgroup.com/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/INTERNSHIP.png" alt="After redesign">
+            </div>
+            <div class="body">
+              <div class="kicker">After</div>
+              <div class="title">New structure</div>
+              <div class="sub">Clear, focused, visual</div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="section-head">
+        <h2>Results</h2>
+        <p>Metrics are the headline here.</p>
+      </div>
+      <div class="results stat-grid">
+        <div class="stat"><b>+XX%</b><span>Engagement</span></div>
+        <div class="stat"><b>+XX%</b><span>Qualified leads</span></div>
+        <div class="stat"><b>+XX%</b><span>Time on site</span></div>
+        <div class="stat"><b>+XX%</b><span>Quote requests</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Design notes</h2>
+        <p>One final, compact summary.</p>
+      </div>
+      <div class="panel">
+        <div class="quote">A cleaner, more strategic site that puts content, visuals, and action in the right order.</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 Maria Greanias</div>
+        <div><a href="mailto:hello@mariagreanias.com">Say hello</a></div>
+      </div>
+    </footer>
   </div>
-  <div>
-    <div class="image-wrap">
-      <a href="https://www.cardinalcolorgroup.com/" target="_blank">
-        <img src="project images and recordings/INTERNSHIP.png" alt="after website">
-      </a>
-    </div>
-    <p style="margin-top:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;">After — clean structure, clear messaging, improved flow</p>
-  </div>
-</div>
-
-</div>
-</section>
-
-<section class="alt">
-<div class="container center">
-
-<h2>Strategy</h2>
-<p>
-The core strategy focused on repositioning Cardinal from a production vendor to a full-service marketing partner. This required a shift in messaging—from listing capabilities to demonstrating outcomes and value.
-</p>
-<p>
-Content was reframed around client needs, emphasizing personalization, data integration, and measurable results. The structure supports multiple user types, from marketing managers seeking campaign support to procurement teams evaluating production capabilities.
-</p>
-<p>
-By aligning messaging, structure, and user flow, the site now communicates a clear and compelling narrative that supports both brand perception and business growth.
-</p>
-
-</div>
-</section>
-
-<section>
-<div class="container">
-
-<h2>Visual Design</h2>
-<p>
-The visual system is intentionally minimal, allowing content and messaging to take priority. Strong typography establishes hierarchy and guides the user’s attention, while generous spacing improves readability and creates a sense of sophistication.
-</p>
-<p>
-Imagery was selected to reflect scale, precision, and real-world application of services. Subtle color accents are used strategically to highlight key elements and calls-to-action without overwhelming the interface.
-</p>
-<p>
-Overall, the design balances professionalism with modern simplicity, reinforcing trust while ensuring the experience feels current and accessible.
-</p>
-
-</div>
-</section>
-
-<section class="alt">
-<div class="container center">
-
-<h2>Results</h2>
-<p>
-Following the redesign, the website demonstrated measurable improvements in both user engagement and lead generation. Clearer messaging and improved usability contributed to stronger performance across key metrics.
-</p>
-
-<div class="stats">
-  <div class="stat">
-    <h3>++%</h3>
-    <p>Increase in user engagement across key pages</p>
-  </div>
-  <div class="stat">
-    <h3>++%</h3>
-    <p>Growth in qualified leads generated through the site</p>
-  </div>
-  <div class="stat">
-    <h3>++%</h3>
-    <p>Longer average time spent on site indicating improved content clarity</p>
-  </div>
-  <div class="stat">
-    <h3>++%</h3>
-    <p>Increase in quote requests driven by stronger calls-to-action</p>
-  </div>
-</div>
-
-</div>
-</section>
-
-<footer>
-  <p>© 2026 Maria Greanias</p>
-</footer>
-
-
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close">✕</span>
-  <video src="project images and recordings/CardinalBEFORE.mov" controls autoplay></video>
-</div>
-
-<script>
-function openLightbox(){
-  document.getElementById('lightbox').classList.add('active');
-}
-
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('active');
-}
-</script>
-
 </body>
 </html>

@@ -1,492 +1,777 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Design — Maria Greanias</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Design - Maria Greanias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --ink: #0b0b0b;
+      --rust: #21a5d5;
+      --gold: #d4a843;
+      --line: rgba(0, 0, 0, 0.08);
+      --card: #fffaf2;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,900;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-<style>
-:root {
-  --cream:#f5f0e8;
-  --ink:#000000;
-  --rust:#21a5d5;
-  --gold:#d4a843;
-  --muted:#000000;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  background:var(--cream);
-  font-family:'DM Mono',monospace;
-  color:var(--ink);
-  cursor:none;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* CUSTOM CURSOR */
-.cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--rust);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-}
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-.cursor-ring {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--rust);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
-}
+    a {
+      color: inherit;
+    }
 
-/* NAV */
-.main-nav{
-  position:sticky;
-  top:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:24px 48px;
-  background:var(--cream);
-  border-bottom:1px solid rgba(0,0,0,0.06);
-  z-index:100;
-}
-.nav-logo{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:900;
-  text-decoration:none;
-  color:var(--ink);
-}
-.nav-right{
-  display:flex;
-  gap:36px;
-}
-.nav-right a{
-  font-size:11px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  text-decoration:none;
-  color:var(--ink);
-  position:relative;
-}
-.nav-right a:hover{color:var(--rust);}
+    img,
+    video {
+      max-width: 100%;
+      display: block;
+    }
 
-/* PAGE HEADER */
-.work-hero{
-  padding:60px 48px 30px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.work-hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(48px,6vw,90px);
-  font-weight:900;
-  line-height:.95;
-}
-.work-hero em{
-  font-style:italic;
-  color:var(--rust);
-}
-.work-hero p{
-  margin-top:24px;
-  max-width:500px;
-  font-size:13px;
-  line-height:1.8;
-}
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
 
-/* HIGHLIGHTED PROJECT */
-.featured-project {
-  padding: 0 48px 100px;
-}
+    .topbar {
+      background: var(--ink);
+      color: var(--cream);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      padding: 10px 24px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
 
-.featured-card {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 60px;
-  align-items: center;
-  text-decoration: none;
-  color: var(--ink);
-}
+    .topbar span {
+      display: inline-block;
+      padding-right: 28px;
+      opacity: 0.9;
+    }
 
-.featured-img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
 
-.featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  transition: transform .6s ease;
-}
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-.featured-card:hover .featured-img img {
-  transform: scale(1.05);
-}
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 28px;
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
 
-.featured-meta {
-  max-width: 500px;
-}
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
 
-.featured-label {
-  font-size: 10px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--rust);
-  margin-bottom: 16px;
-}
+    .nav-links a {
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+    }
 
-.featured-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 48px;
-  font-weight: 900;
-  margin-bottom: 16px;
-}
+    .nav-links a:hover {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.55);
+    }
 
-.featured-desc {
-  font-size: 14px;
-  line-height: 1.9;
-}
+    .hero {
+      padding: 44px 28px 18px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: stretch;
+    }
 
-.case-btn {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 10px 16px;
-  background: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 14px;
-}
+    .hero-copy {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(255, 255, 255, 0.2));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 360px;
+    }
 
-.case-btn:hover {
-  background: #333;
-}
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 14px;
+    }
 
-/* Responsive */
-@media(max-width: 768px){
-  .featured-card {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      max-width: 10ch;
+    }
 
-/* WORK GRID */
-.work-grid{
-  padding:0 48px 120px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:60px;
-}
+    .hero p {
+      margin-top: 18px;
+      max-width: 44ch;
+      font-size: 15px;
+      line-height: 1.85;
+      color: rgba(11, 11, 11, 0.8);
+    }
 
-.project{
-  position:relative;
-  overflow:hidden;
-  cursor:none;
-}
-.project-img{
-  width:100%;
-  aspect-ratio: 4 / 3;   /* keeps everything consistent */
-  overflow:hidden;
-  position:relative;
-  transition:transform .6s ease;
-}
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
 
-.project-img img,
-.project-img video{
-  width:100%;
-  height:100%;
-  object-fit:contain;   /* shows full image */
-  display:block;
-}
-.project:hover .project-img{
-  transform:scale(1.05);
-}
-.project-meta{
-  margin-top:24px;
-}
-.project-title{
-  font-family:'Playfair Display',serif;
-  font-size:28px;
-  font-weight:900;
-  margin-bottom:8px;
-}
-.project-desc{
-  font-size:13px;
-  line-height:1.8;
-  color:var(--muted);
-}
-.project-tag{
-  font-size:10px;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--rust);
-  margin-bottom:12px;
-}
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--line);
+      background: var(--card);
+    }
 
-/* FOOTER */
-footer{
-  background:var(--ink);
-  padding:80px 48px;
-  color:var(--cream);
-}
-footer a{
-  color:var(--rust);
-  text-decoration:none;
-}
+    .button.primary {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-  .work-grid{grid-template-columns:1fr;}
-  .work-hero{padding:80px 24px;}
-  .work-grid{padding:0 24px 80px;}
-  .main-nav{padding:20px 24px;}
-}
-</style>
+    .hero-right-note {
+      margin-top: 18px;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(11, 11, 11, 0.58);
+    }
+
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .visual-tile {
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      min-height: 172px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .visual-tile img,
+    .visual-tile video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .overlay-tag {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .chips {
+      padding: 10px 28px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .section {
+      padding: 24px 28px 56px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1;
+    }
+
+    .section-head p {
+      max-width: 48ch;
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.75);
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.projects {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .card .media {
+      background: var(--card);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+    }
+
+    .card .media img,
+    .card .media video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .card .body {
+      padding: 18px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .kicker {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      line-height: 1.05;
+      font-weight: 900;
+    }
+
+    .sub {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(11, 11, 11, 0.58);
+    }
+
+    .mini {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.78);
+    }
+
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .row img {
+      border-radius: 16px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 24px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat b {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    .panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .panel p,
+    .panel li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: rgba(11, 11, 11, 0.78);
+    }
+
+    .panel ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(33, 165, 213, 0.12);
+      color: #0f6f8f;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 8px 8px 0;
+    }
+
+    .footer {
+      padding: 36px 28px 60px;
+      color: rgba(11, 11, 11, 0.68);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .feature {
+      padding: 24px 28px 56px;
+    }
+
+    .feature-card {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .feature-card .media {
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 450px;
+    }
+
+    .feature-card .media img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .feature-card .body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .case-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--ink);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .work-grid .card .media {
+      min-height: 300px;
+    }
+
+    @media (max-width: 1100px) {
+      .grid.projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .feature-card {
+        grid-template-columns: 1fr;
+      }
+
+      .work-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding: 16px 18px;
+      }
+
+      .hero,
+      .section,
+      .chips,
+      .footer,
+      .feature {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .hero-copy {
+        padding: 24px;
+        min-height: auto;
+      }
+
+      .grid.projects,
+      .grid.two,
+      .split,
+      .hero-visual,
+      .stat-grid,
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .feature-card .media {
+        min-height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="page">
+    <div class="topbar">
+      <span>Web design</span>
+      <span>UI / UX</span>
+      <span>Interactive builds</span>
+      <span>Web design</span>
+      <span>UI / UX</span>
+    </div>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">MG</a>
+        <nav class="nav-links">
+          <a href="webdesign.html">Web Design</a>
+          <a href="graphicdesign.html">Graphic Design</a>
+          <a href="casestudy.html">Case Study</a>
+          <a href="aboutme.html">About</a>
+        </nav>
+      </div>
+    </header>
 
-<nav class="main-nav">
-  <a href="index.html" class="nav-logo">MG</a>
-  <div class="nav-right">
-    <a href="webdesign.html">Web Design</a>
-    <a href="graphicdesign.html">Graphic Design</a>
-    <a href="resume.html">Resume</a>
-    <a href="aboutme.html">About</a>
+    <section class="hero">
+      <div class="hero-copy">
+        <div>
+          <div class="eyebrow">Web design</div>
+          <h1>Interfaces built to feel clean and quick.</h1>
+          <p>Gallery-style project cards, visual previews, and minimal copy.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">See projects</a>
+            <a class="button" href="casestudy.html">Featured case study</a>
+          </div>
+        </div>
+        <div class="hero-right-note">Show the product, not the paragraph.</div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="stack">
+          <div class="visual-tile">
+            <img src="project images and recordings/INTERNSHIP.png" alt="Featured internship project" />
+            <div class="overlay-tag">Featured</div>
+          </div>
+          <div class="visual-tile">
+            <img src="project images and recordings/project1.png" alt="Writing motivator" />
+            <div class="overlay-tag">UI concept</div>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="visual-tile">
+            <img src="project images and recordings/Ember&Oak.png" alt="Ember and Oak" />
+            <div class="overlay-tag">Website</div>
+          </div>
+          <div class="visual-tile">
+            <img src="project images and recordings/project4.png" alt="Shape calculator" />
+            <div class="overlay-tag">Interactive</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="feature-card">
+        <a class="media" href="casestudy.html">
+          <img src="project images and recordings/INTERNSHIP.png" alt="Featured case study" />
+        </a>
+
+        <div class="panel body">
+          <div>
+            <div class="kicker">Featured project</div>
+            <h3>Summer Design Intern</h3>
+            <p>Website redesign for Cardinal Color Group with a more visual, conversion-focused structure.</p>
+          </div>
+
+          <div>
+            <span class="pill">Figma</span>
+            <span class="pill">HTML</span>
+            <span class="pill">CSS</span>
+            <span class="pill">Case study</span>
+          </div>
+
+          <a class="case-btn" href="casestudy.html">View case study</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Each card keeps the title visible and trims the copy down to a single line.</p>
+      </div>
+
+      <div class="work-grid">
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/2a99921e36bb63704ebc88cc0025007e5e6d6cfc/PT.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/PT.png" alt="Pulse Track" />
+            </div>
+            <div class="body">
+              <div class="kicker">Website creation</div>
+              <div class="title">Pulse Track</div>
+              <div class="sub">Workout and training plan</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/2a99921e36bb63704ebc88cc0025007e5e6d6cfc/E%26O.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/Ember&Oak.png" alt="Ember and Oak" />
+            </div>
+            <div class="body">
+              <div class="kicker">Website creation</div>
+              <div class="title">Ember & Oak</div>
+              <div class="sub">Coffee shop site</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ProjectWriter.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/project1.png" alt="Writing Motivator" />
+            </div>
+            <div class="body">
+              <div class="kicker">UI / UX</div>
+              <div class="title">Writing Motivator</div>
+              <div class="sub">Animal prompts by word count</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/index.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/project3.png" alt="Guess the Number" />
+            </div>
+            <div class="body">
+              <div class="kicker">UI / UX</div>
+              <div class="title">Guess the Number</div>
+              <div class="sub">Feedback-based game</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/project3.2.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/project2.png" alt="Guess the Number V2" />
+            </div>
+            <div class="body">
+              <div class="kicker">UI / UX</div>
+              <div class="title">Guess the Number V2</div>
+              <div class="sub">Improved interface</div>
+            </div>
+          </a>
+        </article>
+
+        <article class="card">
+          <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ShapeCalc.html" target="_blank" style="text-decoration:none;color:inherit">
+            <div class="media">
+              <img src="project images and recordings/project4.png" alt="Shape Calculator" />
+            </div>
+            <div class="body">
+              <div class="kicker">UI / UX</div>
+              <div class="title">Shape Calculator</div>
+              <div class="sub">Area and perimeter tool</div>
+            </div>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 Maria Greanias</div>
+        <div><a href="mailto:hello@mariagreanias.com">Say hello</a></div>
+      </div>
+    </footer>
   </div>
-</nav>
-
-<section class="work-hero">
-  <h1>Web <em>Design.</em></h1>
-  <p>Intentional digital experiences rooted in clarity, usability, and expressive visual systems.</p>
-</section>
-
-<section class="featured-project">
-
-  <div class="featured-card">
-
-    <a href="https://www.cardinalcolorgroup.com/" target="_blank" class="featured-img">
-      <img src="project images and recordings/INTERNSHIP.png" alt="Summer Internship Project">
-    </a>
-
-    <div class="featured-meta">
-      <div class="featured-label">FEATURED PROJECT — Summer Internship</div>
-      <div class="featured-title">Summer Design Intern</div>
-      <div class="featured-desc">
-        Over the 25' Summer, I was very grateful and fortunate to work alongside with Links Technology Solutions, getting to be in charge of the redesign of a clients website. It was such an amazing time and experience. It was the perfect environment and helped me realize that it was exactly what I was looking for in a career.
-      </div>
-
-      <a href="casestudy.html" class="case-btn">View Case Study</a>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="work-grid">
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/2a99921e36bb63704ebc88cc0025007e5e6d6cfc/PT.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/PT.png" alt="PT Modal">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">Website Creation</div>
-      <div class="project-title">Pulse Track</div>
-      <div class="project-desc">
-        HTML based website for a workout and training plan.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/2a99921e36bb63704ebc88cc0025007e5e6d6cfc/E%26O.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/Ember&Oak.png" alt="EO Modal">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">Website Creation</div>
-      <div class="project-title">Ember & Oak</div>
-      <div class="project-desc">
-        HTML based website for a cozy coffee shop.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ProjectWriter.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project1.png" alt="Writing Motivator">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Writing Motivator</div>
-      <div class="project-desc">
-        Responsive Writing platform that provides images of animals based on word count.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/index.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project3.png" alt="Number Guesser 1">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Guess the Number</div>
-      <div class="project-desc">
-        Responsive Number guessing game that provides feedback on how close the guess is to the correct number.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/project3.2.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project2.png" alt="Number Guesser 2">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Guess the Number V2</div>
-      <div class="project-desc">
-        Updated version of the number guessing game with a more intuitive interface and improved feedback system.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/ShapeCalc.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project4.png" alt="Shape Calculator">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Shape Calculator</div>
-      <div class="project-desc">
-        Responsive shape calculator that computes area and perimeter for various shapes based on user input.
-      </div>
-    </div>
-  </a>
-  
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/PetRegis.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project5.png" alt="Pet Registration Form">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Pet Registration Form</div>
-      <div class="project-desc">
-        Responsive pet registration form that collects user input.
-      </div>
-    </div>
-  </a>
-  
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/MODALbeatles.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project6.png" alt="Beatles Modal">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Beatles Modal</div>
-      <div class="project-desc">
-        Responsive modal that displays information about the Beatles when triggered by a button click.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/CAT.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/project7.png" alt="Cat Modal">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Cat Modal</div>
-      <div class="project-desc">
-        Responsive modal that displays information about cats when triggered by a button click.
-      </div>
-    </div>
-  </a>
-
-  <a href="https://html-preview.github.io/?url=https://github.com/mariagreanias/Portfolio/blob/ef7502145f7ddc6c87bf7323dabeda13e653810f/Sketch.html" target="_blank" class="project">
-    <div class="project-img">
-      <img src="project images and recordings/Project8.png" alt="Sketch Modal">
-    </div>
-  
-    <div class="project-meta">
-      <div class="project-tag">UI / UX</div>
-      <div class="project-title">Drawing Program</div>
-      <div class="project-desc">
-        Responsive drawing program that allows users to create sketches on a canvas element, with options to change brush size and color.
-      </div>
-    </div>
-  </a>
-
-  
-
-</section>
-
-<footer>
-  <p>© 2026 Maria Greanias — <a href="mailto:hello@mariagreanias.com">Say hello</a></p>
-</footer>
-
-<script>
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; 
-    my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    cursorRing.style.left = rx + 'px';
-    cursorRing.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, .project, .skill-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px';
-      cursor.style.height = '20px';
-      cursorRing.style.width = '60px';
-      cursorRing.style.height = '60px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px';
-      cursor.style.height = '12px';
-      cursorRing.style.width = '40px';
-      cursorRing.style.height = '40px';
-    });
-  });
-</script>
-
 </body>
 </html>
