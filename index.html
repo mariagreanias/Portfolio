@@ -6,6 +6,15 @@
 <title>Maria Greanias — Visual Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ===================================================== */
+  /* STYLE SYSTEM                                          */
+  /* Change colors, fonts, spacing, and layout behavior here */
+  /* ===================================================== */
+
+  /* ===================================================== */
+  /* THEME VARIABLES                                       */
+  /* Main colors used across the page                      */
+  /* ===================================================== */
   :root {
     --cream:#f5f0e8;
     --ink:#0b0b0b;
@@ -13,8 +22,15 @@
     --line:rgba(0,0,0,.08);
     --card:#fffaf2;
   }
+
+  /* Global reset: removes browser default spacing */
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+
+  /* Smooth scrolling for anchor links */
+  html{
+    scroll-behavior:smooth}
+
+  /* Base page settings: background, text color, and font family */
   body{
     background:var(--cream);
     color:var(--ink);
@@ -22,10 +38,23 @@
     -webkit-font-smoothing:antialiased;
     text-rendering:optimizeLegibility;
   }
-  a{color:inherit}
-  img,video{max-width:100%;display:block}
-  .page{max-width:1440px;margin:0 auto}
 
+  /* Links inherit the current text color unless overridden */
+  a{
+    color:inherit}
+
+  /* Media defaults: keep images/videos responsive */
+  img,video{
+    max-width:100%;display:block
+  }
+
+  /* Overall page width wrapper */
+  .page{
+    max-width:1440px;margin:0 auto
+  }
+
+
+  /* Top announcement bar */
   .topbar{
     background:var(--ink);
     color:var(--cream);
@@ -36,8 +65,12 @@
     overflow:hidden;
     white-space:nowrap;
   }
-  .topbar span{display:inline-block;padding-right:28px;opacity:.85}
+  .topbar span{
+    display:inline-block;padding-right:28px;opacity:.85
+  }
 
+
+  /* Sticky navigation bar */
   .nav{
     position:sticky;
     top:0;
@@ -77,9 +110,15 @@
     border:1px solid transparent;
     border-radius:999px;
   }
-  .nav-links a:hover{border-color:var(--line);background:rgba(255,255,255,.55)}
+  .nav-links a:hover{
+    border-color:var(--line);background:rgba(255,255,255,.55)
+  }
 
-  .section{padding:26px 28px 56px}
+
+  /* Standard section spacing */
+  .section{
+    padding:26px 28px 56px
+  }
   .section-head{
     display:flex;
     justify-content:space-between;
@@ -100,6 +139,8 @@
     color:rgba(11,11,11,.75);
   }
 
+
+  /* HERO SECTION: main intro area */
   .hero{
     padding:38px 28px 18px;
     display:grid;
@@ -134,7 +175,7 @@
   .hero p{
     margin-top:18px;
     max-width:44ch;
-    font-size:15px;
+    font-size:16px;
     line-height:1.85;
     color:rgba(11,11,11,.8);
   }
@@ -157,7 +198,11 @@
     border:1px solid var(--line);
     background:var(--card);
   }
-  .button.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .button.primary{
+    background:var(--ink);
+    color:var(--cream);
+    border-color:var(--ink)
+  }
   .hero-note{
     font-size:12px;
     letter-spacing:.16em;
@@ -165,6 +210,8 @@
     color:rgba(11,11,11,.55);
   }
 
+
+  /* Right-side image grid in hero */
   .hero-visual{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -199,6 +246,8 @@
     text-transform:uppercase;
   }
 
+
+  /* Skill chips below hero */
   .chips{
     padding:10px 28px 6px;
     display:flex;
@@ -215,10 +264,14 @@
     background:rgba(255,255,255,.42);
   }
 
+
+  /* Reusable grid layouts */
   .grid{display:grid;gap:18px}
   .projects{grid-template-columns:repeat(3,minmax(0,1fr))}
   .two{grid-template-columns:repeat(2,minmax(0,1fr))}
   .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+  /* Project and content cards */
   .card{
     border:1px solid var(--line);
     border-radius:26px;
@@ -254,18 +307,24 @@
   }
   .title{
     font-family:'Playfair Display',serif;
-    font-size:26px;
-    line-height:1.05;
+    font-size:50px;
+    line-height:auto;
     font-weight:900;
   }
   .sub{
-    font-size:12px;
+    font-size:16px;
     letter-spacing:.14em;
     text-transform:uppercase;
     color:rgba(11,11,11,.58);
   }
-  .mini{font-size:13px;line-height:1.8;color:rgba(11,11,11,.78)}
+  .mini{
+    font-size:18px;
+    line-height:auto;
+    color:rgba(11,11,11,.78)
+  }
 
+
+  /* Featured project layout */
   .highlight{
     display:grid;
     grid-template-columns:1.2fr .8fr;
@@ -306,7 +365,14 @@
     width:fit-content;
   }
 
-  .stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+
+  /* Statistics strip */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:14px
+  }
+
   .stat{
     background:var(--ink);
     color:var(--cream);
@@ -317,6 +383,8 @@
   .stat b{display:block;font-family:'Playfair Display',serif;font-size:34px;line-height:1}
   .stat span{display:block;margin-top:8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
 
+
+  /* Two-column about/contact layout */
   .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .panel{
     border:1px solid var(--line);
@@ -348,6 +416,8 @@
     object-fit:contain;
     background:#fff;
   }
+
+  /* Footer */
   .footer{
     padding:36px 28px 60px;
     color:rgba(11,11,11,.68);
@@ -362,6 +432,8 @@
     flex-wrap:wrap;
   }
 
+
+  /* Tablet and smaller screens */
   @media (max-width: 1100px){
     .projects,.three{grid-template-columns:repeat(2,minmax(0,1fr))}
     .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -381,8 +453,17 @@
 </head>
 <body>
 <div class="page">
+  <!-- ===================================================== -->
+  <!-- TOP BAR                                              -->
+  <!-- Small category strip at the very top of the page     -->
+  <!-- ===================================================== -->
   <div class="topbar"><span>Visual portfolio</span><span>Web design</span><span>Graphic design</span><span>Brand identity</span></div>
 
+
+  <!-- ===================================================== -->
+  <!-- NAVIGATION                                           -->
+  <!-- Edit menu links and logo here                       -->
+  <!-- ===================================================== -->
   <header class="nav">
     <div class="nav-inner">
       <a class="brand" href="index.html">MG</a>
@@ -395,6 +476,11 @@
     </div>
   </header>
 
+
+  <!-- ===================================================== -->
+  <!-- HERO SECTION                                          -->
+  <!-- Edit the name, intro, buttons, and hero images here  -->
+  <!-- ===================================================== -->
   <section class="hero">
     <div class="hero-copy">
       <div>
@@ -406,14 +492,15 @@
           <a class="button" href="aboutme.html">About Maria</a>
         </div>
       </div>
-      <div class="hero-note">A visual-first portfolio built like a curated collection.</div>
     </div>
 
     <div class="hero-visual">
+      <!-- Hero image column 1: swap these images to change the first impression -->
       <div class="stack">
         <div class="visual-tile"><img src="project images and recordings/INTERNSHIP.png" alt="Featured web design project"><div class="overlay-tag">Featured case study</div></div>
         <div class="visual-tile"><img src="GD/POSTERS/LOUIE POSTER/POSTERv2.png" alt="Graphic design poster"><div class="overlay-tag">Poster design</div></div>
       </div>
+      <!-- Hero image column 2: swap these images to change the supporting visuals -->
       <div class="stack">
         <div class="visual-tile"><img src="project images and recordings/PT.png" alt="Web project"><div class="overlay-tag">UI / UX</div></div>
         <div class="visual-tile"><img src="GD/POSTERS/PERSONSPOT.png" alt="Album remake"><div class="overlay-tag">Editorial layout</div></div>
@@ -421,6 +508,11 @@
     </div>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- SKILL TAGS                                            -->
+  <!-- Quick specialties displayed under the hero           -->
+  <!-- ===================================================== -->
   <div class="chips">
     <div class="chip">Website Design</div>
     <div class="chip">Graphic Design</div>
@@ -429,12 +521,17 @@
     <div class="chip">Responsive UI</div>
   </div>
 
+
+  <!-- ===================================================== -->
+  <!-- FEATURED PROJECT                                      -->
+  <!-- Main highlighted project with image, title, and CTA  -->
+  <!-- ===================================================== -->
   <section class="section" id="featured">
     <div class="section-head">
       <h2>Featured project</h2>
-      <p>Lead with the strongest piece so the page has a clear starting point.</p>
     </div>
     <article class="card highlight">
+      <!-- Featured project image links to the detailed case study -->
       <a class="media" href="casestudy.html" style="text-decoration:none;color:inherit"><img src="project images and recordings/INTERNSHIP.png" alt="Summer internship redesign"></a>
       <div class="body">
         <div>
@@ -458,22 +555,34 @@
     </article>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- SELECTED WORK                                         -->
+  <!-- Portfolio cards; replace images, titles, and links    -->
+  <!-- ===================================================== -->
   <section class="section">
     <div class="section-head">
       <h2>Selected work</h2>
-      <p>Three projects side by side make the portfolio easier to scan.</p>
     </div>
     <div class="grid projects">
+      <!-- Project card 1 -->
       <article class="card"><a href="webdesign.html" style="text-decoration:none;color:inherit"><div class="media"><img src="project images and recordings/Ember&Oak.png" alt="Ember and Oak"></div><div class="body"><div class="meta"><div><div class="kicker">Website</div><div class="title">Ember & Oak</div></div><div class="sub">Coffee shop</div></div></div></a></article>
+      <!-- Project card 2 -->
       <article class="card"><a href="graphicdesign.html" style="text-decoration:none;color:inherit"><div class="media"><img src="GD/POSTERS/FUNDRAISER.png" alt="Fundraiser poster"></div><div class="body"><div class="meta"><div><div class="kicker">Poster</div><div class="title">Club Fundraiser</div></div><div class="sub">Illustrator</div></div></div></a></article>
+      <!-- Project card 3 -->
       <article class="card"><a href="webdesign.html" style="text-decoration:none;color:inherit"><div class="media"><img src="project images and recordings/project1.png" alt="Writing motivator"></div><div class="body"><div class="meta"><div><div class="kicker">UI / UX</div><div class="title">Writing Motivator</div></div><div class="sub">Interactive concept</div></div></div></a></article>
     </div>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- CAPABILITIES                                          -->
+  <!-- Edit the four service/skill cards here                -->
+  <!-- ===================================================== -->
   <section class="section">
     <div class="section-head">
       <h2>What I focus on</h2>
-      <p>Four concise capability cards keep the layout balanced and reduce clutter.</p>
+      
     </div>
     <div class="grid two">
       <div class="panel"><h3>Visual systems</h3><p>Layouts that feel consistent, intentional, and easy to navigate.</p></div>
@@ -483,10 +592,14 @@
     </div>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- STATS                                                 -->
+  <!-- Quick numbers and labels                               -->
+  <!-- ===================================================== -->
   <section class="section">
     <div class="section-head">
       <h2>Quick visual snapshot</h2>
-      <p>Short labels and larger numbers give the page a faster read.</p>
     </div>
     <div class="stat-grid">
       <div class="stat"><b>3+</b><span>Years designing</span></div>
@@ -496,17 +609,24 @@
     </div>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- ABOUT + TOOLS                                         -->
+  <!-- Personal info, software, email, and résumé link       -->
+  <!-- ===================================================== -->
   <section class="section">
     <div class="section-head">
       <h2>About and tools</h2>
-      <p>Put the personal and practical details together so they are easier to find.</p>
+    
     </div>
     <div class="split">
+      <!-- Personal bio panel -->
       <div class="panel">
         <h3>About Maria</h3>
         <p>Designing clean, visual experiences that feel organized, expressive, and easy to scan.</p>
         <p style="margin-top:12px">If you need a portfolio page that feels more structured, this version keeps the strongest work up front and moves the supporting details into smaller sections.</p>
       </div>
+      <!-- Tools, software, and contact details -->
       <div class="panel">
         <h3>Tools and contact</h3>
         <ul>
@@ -519,10 +639,15 @@
     </div>
   </section>
 
+
+  <!-- ===================================================== -->
+  <!-- FOOTER                                                -->
+  <!-- Final contact info and copyright                      -->
+  <!-- ===================================================== -->
   <footer class="footer">
     <div class="footer-inner">
       <div>© 2026 Maria Greanias</div>
-      <div>hello@mariagreanias.com</div>
+      <div>mariagreanias@gmail.com</div>
     </div>
   </footer>
 </div>
